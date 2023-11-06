@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
     --Preto: #000000;
@@ -10,12 +10,23 @@
     --Azul-medio-claro: #889DC7;
     --Botao-azul: #2065EF;
     --Botao-verde: #0EA045;
+    --Azul-ativado: #0056b3;
 }
 
 html, body { height: 100%; }
 body { 
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Raleway', 'Montserrat', sans-serif;
     background-color: var(--Cinza-claro-claro);
+}
+
+h1 {
+    font-family: 'Montserrat';
+    font-weight: 400;
+}
+
+h2 {
+    font-family: 'Montserrat';
+    font-weight: 400;
 }
     

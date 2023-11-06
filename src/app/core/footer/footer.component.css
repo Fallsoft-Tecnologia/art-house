@@ -1,0 +1,56 @@
+footer {
+    background-color: var(--Cinza-escuro-escuro);
+}
+
+
+footer h5 {
+    font-size: 16px;
+}
+
+footer a, label {
+    color: var(--Branco);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 14px;
+}
+
+
+footer a:hover {
+    color: var(--Botao-azul);
+}
+
+/* Estilo para os campos de entrada de e-mail e WhatsApp */
+.form-group input {
+    font-size: 16px;
+    font-weight: 500;
+    background: white;
+    border-radius: 2px;
+}
+
+.form-group .btn {
+    font-family: 'Raleway';
+    font-size: 14px;
+    font-weight: 600;
+    height: 40px;
+    width: 130px;
+    background-color: var(--Botao-azul);
+    border: none;
+    border-radius: 2px;
+}
+
+.form-group .btn:hover {
+    background-color: var(--Azul-ativado);
+  }
+
+/* Estilo para a linha horizontal */
+hr {
+    background-color: var(--Branco);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Estilo para o aviso de direitos autorais */
+p {
+    font-size: 12px;
+    font-weight: 400;
+}

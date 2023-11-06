@@ -1,0 +1,27 @@
+
+.card {
+    height: 350px;
+    border-radius: 5px;
+}
+
+.card .card-img {
+    height: 100%;
+}
+
+.custom-badge {
+    background-color: #889DC7;
+    border-radius: 5px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-weight: 600;
+    padding-right: 16px;
+    padding-left: 16px;
+    width: 130px;
+  }
+  
+  .badge-content {
+    background-color: #889DC7;
+  }
+  
