@@ -1,0 +1,24 @@
+.card {
+    border-radius: 5px;
+}
+
+.card .card-img {
+    height: 100%;
+}
+
+.custom-badge {
+    background-color: var(--Azul-medio-claro);
+    border-radius: 5px;
+    width: 130px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    color: var(--Black);
+    font-weight: 600;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+.badge-content {
+    background-color: var(--Azul-medio-claro);
+}

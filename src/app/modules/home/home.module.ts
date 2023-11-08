@@ -4,6 +4,7 @@ import { CarrosselComponent } from './carrossel/carrossel.component';
 import { HomeComponent } from './home.component';
 import { BannerComponent } from './banner/banner.component';
 import { LancamentosComponent } from './lancamentos/lancamentos.component';
+import { CardPapelDeParedeComponent } from 'src/app/shared/components/card-papel-de-parede/card-papel-de-parede.component';
 
 
 
@@ -12,7 +13,8 @@ import { LancamentosComponent } from './lancamentos/lancamentos.component';
     CarrosselComponent,
     HomeComponent,
     BannerComponent,
-    LancamentosComponent
+    LancamentosComponent,
+    CardPapelDeParedeComponent
   ],
   imports: [
     CommonModule
