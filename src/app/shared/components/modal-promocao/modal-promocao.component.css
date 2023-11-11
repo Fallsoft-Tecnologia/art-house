@@ -1,0 +1,56 @@
+.modal-content {
+    font-family: 'Raleway';
+    background: var(--Cinza-escuro-escuro);
+    border-radius: 10px;
+    color: var(--Branco);
+    width: 70%; 
+}
+
+.close {
+    color: var(--Branco);
+}
+
+.modal-header {
+    border: none;
+}
+
+h1 {
+    width: 330px;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form-group input {
+    color: var(--Preto);
+    font-size: 16px;
+    font-weight: 600;
+    background: var(--Branco);
+    border-radius: 2px;
+    height: 56px;
+}
+.form-group input::placeholder {
+    color: var(--Cinza-claro);
+  }
+
+.form-group .btn {
+    font-family: 'Raleway';
+    font-size: 14px;
+    font-weight: 600;
+    height: 40px;
+    width: 130px;
+    background-color: var(--Botao-azul);
+    border: none;
+    border-radius: 2px;
+}
+
+.form-group .btn:hover {
+    background-color: var(--Azul-ativado);
+  }
