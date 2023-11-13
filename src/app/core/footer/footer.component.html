@@ -34,14 +34,14 @@
             </div>
             <div class="col-4 pe-5">
                 <h5>Receba Nossas Novidades</h5>
-                <form class="form-group" [formGroup]="cadastroForm" (submit)="cadastrar()">
+                <form class="form-group" [formGroup]="leadDescontoForm" (submit)="cadastrar()">
                     <div class="py-2">
                         <label>Insira seu e-mail</label>
                         <input type="email" formControlName="email" class="form-control" placeholder="E-mail">
                     </div>
                     <div>
                         <label>Ou insira seu whatsapp</label>
-                        <input type="text" formControlName="whatsapp" class="form-control" placeholder="Whatsapp">
+                        <input type="text" formControlName="celular" class="form-control" placeholder="Whatsapp">
                     </div>
                     <div class="d-flex justify-content-center py-2">
                         <button type="submit" class="btn btn-primary">Cadastre-se</button>

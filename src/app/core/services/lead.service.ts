@@ -1,18 +1,19 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
-import { Lead } from 'src/app/shared/models/Lead';
+import { Observable, catchError, retry, throwError } from 'rxjs';
+import { LeadDescontoForm } from 'src/app/shared/models/leadDescontoForm';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeadService {
-  private apiUrl = 'http://localhost:8080/api/leads';
+  private api = 'http://localhost:8080/api/leads';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  createLead(lead: Lead): Observable<Lead> {
-    return this.http.post<Lead>(this.apiUrl, lead).pipe(
+  createLead(lead: LeadDescontoForm): Observable<LeadDescontoForm> {
+    return this.http.post<LeadDescontoForm>(this.api, lead).pipe(
+      retry(2),
       catchError(this.handleHttpError)
     );
   }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LeadService } from '../services/lead.service';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Lead } from 'src/app/shared/models/Lead';
+import { LeadDescontoForm } from 'src/app/shared/models/leadDescontoForm';
 
 @Component({
   selector: 'app-footer',
@@ -9,7 +9,7 @@ import { Lead } from 'src/app/shared/models/Lead';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
-  cadastroForm: FormGroup = new FormGroup({});
+  leadDescontoForm: FormGroup = new FormGroup({});
   cadastroSucesso = false;
 
   constructor(private fb: FormBuilder, private leadService: LeadService) {}
@@ -19,30 +19,20 @@ export class FooterComponent {
   }
 
   initForm() {
-    this.cadastroForm = this.fb.group({
-      email: [null, [Validators.email]],
-      whatsapp: [null, [Validators.pattern(/^[0-9]*$/)]],
+    this.leadDescontoForm = this.fb.group({
+      email: ['', [Validators.email]],
+      celular: ['']
     });
   }
 
   cadastrar() {
-    if (this.cadastroForm.valid) {
-      const leadData: Lead = {
-        nome: undefined,
-        dataHoraCriacao: undefined,
-        dataHoraAlteracao: undefined,
-        contato: [{
-          email: this.cadastroForm.value.email,
-          celular: this.cadastroForm.value.whatsapp,
-          dataHoraCriacao: undefined,
-          dataHoraAlteracao: undefined,
-        }],
-      };
+    if (this.leadDescontoForm.valid) {
+      const leadDesconto: LeadDescontoForm = this.leadDescontoForm.getRawValue();
+      console.log(leadDesconto);
   
-      this.leadService.createLead(leadData).subscribe({
-        next: (result) => {
-          console.log('Lead cadastrado com sucesso:', result);
-          this.cadastroForm.reset();
+      this.leadService.createLead(leadDesconto).subscribe({
+        next: () => {
+          this.leadDescontoForm.reset();
           this.cadastroSucesso = true;
           setTimeout(() => {
             this.cadastroSucesso = false;
