@@ -5,7 +5,6 @@ import { HomeComponent } from './home.component';
 import { BannerComponent } from './banner/banner.component';
 import { LancamentosComponent } from './lancamentos/lancamentos.component';
 import { CardPapelDeParedeComponent } from 'src/app/shared/components/card-papel-de-parede/card-papel-de-parede.component';
-import { NotificacaoSucessoComponent } from 'src/app/shared/components/notificacao-sucesso/notificacao-sucesso.component';
 
 
 

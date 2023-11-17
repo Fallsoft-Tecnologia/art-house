@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeadService } from 'src/app/core/services/lead.service';
 import { LeadDescontoForm } from '../../models/leadDescontoForm';
-import { NotificacaoSucessoService } from '../notificacao-sucesso/notificacao-sucesso.service';
+import { NotificacaoService, TipoNotificacao } from '../notificacao/notificacao.service';
 
 @Component({
   selector: 'app-lead-desconto-form',
@@ -12,8 +12,9 @@ import { NotificacaoSucessoService } from '../notificacao-sucesso/notificacao-su
 export class LeadDescontoFormComponent implements OnInit {
   leadDescontoForm: FormGroup = new FormGroup({});
   successMessage: string = 'Seu cadastro foi realizado com sucesso!';
+  errorMessage: string = 'Seu cadastro falhou!';
 
-  constructor(private fb: FormBuilder, private leadService: LeadService, private notificacaoService: NotificacaoSucessoService) {}
+  constructor(private fb: FormBuilder, private leadService: LeadService, private notificacaoService: NotificacaoService) {}
 
   ngOnInit() {
     this.initForm();
@@ -38,15 +39,19 @@ export class LeadDescontoFormComponent implements OnInit {
   
         this.leadService.createLead(leadDesconto).subscribe({
           next: () => {
+            this.notificacaoService.mostrarNotificacao(this.successMessage, TipoNotificacao.Sucesso);
             this.leadDescontoForm.reset();
-            this.notificacaoService.mostrarNotificacao(this.successMessage);
           },
           error: (error) => {
+            this.notificacaoService.mostrarNotificacao(this.errorMessage, TipoNotificacao.Erro);
             console.error('Erro ao cadastrar o lead:', error);
           }
         });
+      } else {
+        this.notificacaoService.mostrarNotificacao(this.errorMessage, TipoNotificacao.Erro);
       }
     } else {
+      this.notificacaoService.mostrarNotificacao(`${this.errorMessage} Preencha pelo menos um dos campos (email ou celular).`, TipoNotificacao.Erro);
       console.log('Preencha pelo menos um dos campos (email ou celular).');
     }
   }

@@ -14,7 +14,7 @@ import { HomeModule } from './modules/home/home.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LeadDescontoFormComponent } from './shared/components/lead-desconto-form/lead-desconto-form.component';
 import { IConfig, NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
-import { NotificacaoSucessoComponent } from './shared/components/notificacao-sucesso/notificacao-sucesso.component';
+import { NotificacaoComponent } from './shared/components/notificacao/notificacao.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -27,7 +27,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     WhatsappComponent,
     ModalPromocaoComponent,
     LeadDescontoFormComponent,
-    NotificacaoSucessoComponent
+    NotificacaoComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,6 @@
   top: 100px;
   z-index: 1000;
   max-width: 100%;
-  background-color: #28a745; /* Cor de fundo para notificação de sucesso */
   color: #ffffff; /* Cor do texto */
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -23,7 +22,11 @@
 }
 
 .success-toast {
-  background-color: #28a745;
+  background-color: #28a745; /* Cor de fundo para notificação de sucesso */
+}
+
+.error-toast {
+  background-color: #dc3545; /* Cor de fundo para notificação de erro */
 }
 
 /* Define a animação fadeIn */
