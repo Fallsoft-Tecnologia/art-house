@@ -1,0 +1,25 @@
+.form-group input {
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 16px;
+    font-weight: 500;
+    background: var(--Branco);
+    border-radius: 2px;
+    height: 56px;
+}
+
+.form-group input::placeholder {
+    color: var(--Cinza-claro);
+}
+
+.form-group .btn {
+    font-size: 14px;
+    font-weight: 600;
+    height: 40px;
+    width: 130px;
+    background-color: var(--Botao-azul);
+    border-radius: 2px;
+}
+
+.form-group .btn:hover {
+    background-color: var(--Azul-ativado);
+}

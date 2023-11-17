@@ -1,0 +1,13 @@
+<form class="form-group" [formGroup]="leadDescontoForm" (submit)="cadastrar()">
+    <div class="py-2">
+        <label>Insira seu e-mail</label>
+        <input type="email" formControlName="email" class="form-control" placeholder="E-mail">
+    </div>
+    <div>
+        <label>Ou insira seu whatsapp</label>
+        <input type="text" formControlName="celular" class="form-control" placeholder="Whatsapp" mask="(00) 00000-0000">
+    </div>
+    <div class="py-2">
+        <button type="submit" class="btn btn-primary">Cadastre-se</button>
+    </div>
+</form>

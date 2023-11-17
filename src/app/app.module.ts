@@ -12,6 +12,11 @@ import { WhatsappComponent } from './core/whatsapp/whatsapp.component';
 import { ModalPromocaoComponent } from './shared/components/modal-promocao/modal-promocao.component';
 import { HomeModule } from './modules/home/home.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LeadDescontoFormComponent } from './shared/components/lead-desconto-form/lead-desconto-form.component';
+import { IConfig, NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NotificacaoSucessoComponent } from './shared/components/notificacao-sucesso/notificacao-sucesso.component';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   declarations: [
@@ -20,17 +25,22 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     DirectivesComponent,
     WhatsappComponent,
-    ModalPromocaoComponent
+    ModalPromocaoComponent,
+    LeadDescontoFormComponent,
+    NotificacaoSucessoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxMaskDirective, 
+    NgxMaskPipe,
     ReactiveFormsModule,
+    
     HomeModule
   ],
-  providers: [],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

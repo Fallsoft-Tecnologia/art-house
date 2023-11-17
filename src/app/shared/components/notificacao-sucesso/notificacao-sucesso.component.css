@@ -1,0 +1,37 @@
+.toast {
+  position: fixed;
+  top: 100px;
+  z-index: 1000;
+  max-width: 100%;
+  background-color: #28a745; /* Cor de fundo para notificação de sucesso */
+  color: #ffffff; /* Cor do texto */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  /* Adiciona a transição de entrada */
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.toast-body {
+  padding: 15px;
+}
+
+.btn-close {
+  padding: 15px;
+  cursor: pointer;
+}
+
+.success-toast {
+  background-color: #28a745;
+}
+
+/* Define a animação fadeIn */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
