@@ -1,0 +1,21 @@
+.navbar {
+    background-color: var(--Cinza-escuro-escuro);
+    border-top: 1px solid var(--Branco);
+    border-bottom: 1px solid var(--Branco);
+}
+
+.navbar-nav .navbar-text {
+    color: var(--Branco);
+    font-variant-numeric: lining-nums proportional-nums;
+}
+
+button {
+    color: var(--Branco);
+    background-color: unset;
+    border: unset;
+}
+
+.fa-filter-off:before {
+    content: "\f0b0";
+    /* Ícone "fa-filter-off" */
+}

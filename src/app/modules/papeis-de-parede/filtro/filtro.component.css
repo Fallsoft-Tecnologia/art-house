@@ -1,0 +1,4 @@
+.container-fluid {
+    background-color: var(--Cinza-escuro-escuro);
+    max-width: 450px;
+}

@@ -15,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LeadDescontoFormComponent } from './shared/components/lead-desconto-form/lead-desconto-form.component';
 import { IConfig, NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { NotificacaoComponent } from './shared/components/notificacao/notificacao.component';
+import { PapeisDeParedeComponent } from './modules/papeis-de-parede/papeis-de-parede.component';
+import { PapeisDeParedeModule } from './modules/papeis-de-parede/papeis-de-parede.module';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -27,7 +29,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     WhatsappComponent,
     ModalPromocaoComponent,
     LeadDescontoFormComponent,
-    NotificacaoComponent
+    NotificacaoComponent,
+    PapeisDeParedeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +40,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     NgxMaskDirective, 
     NgxMaskPipe,
     ReactiveFormsModule,
-    
-    HomeModule
+    HomeModule,
+    PapeisDeParedeModule
   ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent]
