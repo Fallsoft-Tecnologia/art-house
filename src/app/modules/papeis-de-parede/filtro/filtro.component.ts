@@ -6,5 +6,4 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./filtro.component.css']
 })
 export class FiltroComponent {
-  @Input() filterOpened: boolean = false;
 }

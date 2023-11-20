@@ -1,24 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-        <div class="navbar-nav me-auto">
-            <span class="navbar-text">
-                <button class="btn btn-dark px-3" (click)="toggleFilter()" data-bs-toggle="collapse" data-bs-target="#filtro" aria-expanded="false" aria-controls="filtro">
-                    <i class="fa"[ngClass]="{'fa-filter': !filterOpened, 'fa-filter-off': filterOpened}"></i> Filtros
-                </button> 
-                | 
+        <div class="navbar-nav me-auto w-100">
+            <span class="navbar-item">
+                <button class="btn btn-dark px-3" (click)="toggleFilter()" data-bs-toggle="collapse"
+                    data-bs-target="#filtro" aria-expanded="true" aria-controls="filtro">
+                    <i [ngClass]="{'fa-solid': filterOpened, 'fa-regular': !filterOpened}" class="fa-filter"></i> Filtros
+                </button>
+                |
                 <span class="px-3">
                     {{itemCount }} resultado(s)
                 </span>
             </span>
-        </div>
-
-        <div class="navbar-nav ms-auto">
-            <div class="dropdown">
+            <div class="nav-item dropdown ms-auto">
                 <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    Ordenar por
+                    Lançamentos
                 </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" (click)="changeSorting('lancamentos')">Lançamentos</a></li>
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end mt-2">
+                    <li><a class="dropdown-item active" (click)="changeSorting('lancamentos')">Lançamentos <i class="fa-solid fa-check px-2"></i></a></li>
                     <li><a class="dropdown-item" (click)="changeSorting('maisVendidos')">Mais Vendidos</a></li>
                 </ul>
             </div>

@@ -2,9 +2,10 @@
     background-color: var(--Cinza-escuro-escuro);
     border-top: 1px solid var(--Branco);
     border-bottom: 1px solid var(--Branco);
+    height: 80px;
 }
 
-.navbar-nav .navbar-text {
+.navbar-nav .navbar-item {
     color: var(--Branco);
     font-variant-numeric: lining-nums proportional-nums;
 }
@@ -18,4 +19,8 @@ button {
 .fa-filter-off:before {
     content: "\f0b0";
     /* Ícone "fa-filter-off" */
+}
+
+.dropdown-menu {
+    max-width: 100%;
 }

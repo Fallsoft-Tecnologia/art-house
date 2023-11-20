@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IconDefinition, faFilter } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-papeis-de-parede',
@@ -7,8 +8,7 @@ import { Component } from '@angular/core';
 })
 export class PapeisDeParedeComponent {
   totalItems: number = 130;
-  showFilter: boolean = false;
-
+  showFilter: boolean = true;
 
   toggleFilter() {
     this.showFilter = !this.showFilter;

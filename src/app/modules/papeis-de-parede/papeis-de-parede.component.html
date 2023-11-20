@@ -1,5 +1,10 @@
 <section class="container-titulo">
     <h1>Papeis de parede</h1>
 </section>
-<app-cabecalho [itemCount]="totalItems" (filterToggle)="toggleFilter()" (sortingChanged)="changeSorting($event)"></app-cabecalho>
-<app-filtro *ngIf="showFilter" (closeFilter)="toggleFilter()"></app-filtro>
+<app-cabecalho [itemCount]="totalItems" (filterToggle)="toggleFilter()"
+    (sortingChanged)="changeSorting($event)"></app-cabecalho>
+<div class="papeis-container row h-100">
+    <div class="col-4">
+        <app-filtro *ngIf="showFilter"></app-filtro>
+    </div>
+</div>

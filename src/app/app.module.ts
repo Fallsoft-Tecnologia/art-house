@@ -17,6 +17,7 @@ import { IConfig, NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask
 import { NotificacaoComponent } from './shared/components/notificacao/notificacao.component';
 import { PapeisDeParedeComponent } from './modules/papeis-de-parede/papeis-de-parede.component';
 import { PapeisDeParedeModule } from './modules/papeis-de-parede/papeis-de-parede.module';
+import { NgbCollapse, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -43,7 +44,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     HomeModule,
     PapeisDeParedeModule
   ],
-  providers: [provideNgxMask()],
+  providers: [provideNgxMask(), NgbCollapse],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
