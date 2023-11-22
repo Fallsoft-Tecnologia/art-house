@@ -1,6 +1,6 @@
 .container-filtro {
     background-color: var(--Cinza-escuro-escuro);
-    max-width: 450px;
+    min-height: 100%;
 }
 
 button {
@@ -25,6 +25,12 @@ hr {
 .form-check-input {
     width: 25px;
     height: 25px;
+}
+.form-check-label:hover, .form-check-input:hover {
+    cursor: pointer;
+}
+.accordion-body .btn:hover {
+    cursor: default;
 }
 
 img {

@@ -1,10 +1,12 @@
 <section class="container-titulo">
     <h1>Papeis de parede</h1>
 </section>
-<app-cabecalho [itemCount]="totalItems" (filterToggle)="toggleFilter()"
-    (sortingChanged)="changeSorting($event)"></app-cabecalho>
-<div class="papeis-container row h-100">
-    <div class="col-4">
-        <app-filtro *ngIf="showFilter"></app-filtro>
+<app-cabecalho [itemCount]="totalItems" (filterToggle)="toggleFilter()" (sortingChanged)="changeSorting($event)"></app-cabecalho>
+<div [ngClass]="{'row': showFilter}">
+    <div class="filter col-lg-4 col-md-3 col-auto" *ngIf="showFilter">
+        <app-filtro></app-filtro>
+    </div>
+    <div class="justify-content-center text-center" [ngClass]="{'col': showFilter, 'col-auto': !showFilter}">
+        <app-cards></app-cards>
     </div>
 </div>

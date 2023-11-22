@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
   selector: 'app-card-papel-de-parede',
@@ -6,10 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./card-papel-de-parede.component.css']
 })
 export class CardPapelDeParedeComponent {
-  @Input() tamanho: 'grande' | 'pequeno' = 'grande';
-  @Input() imagePath: string = 'caminho/default/da/imagem.jpg';
+  @Input() imagePath: string = '';
 
-  get cardHeight(): string {
-    return this.tamanho === 'grande' ? '350px' : '200px';
+  constructor(private modalService: ModalService) {}
+
+  openPapelIndividualModal() {
+    this.modalService.openModal(this.imagePath);
   }
 }

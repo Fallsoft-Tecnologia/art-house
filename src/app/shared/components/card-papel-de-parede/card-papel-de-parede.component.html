@@ -1,6 +1,6 @@
-<article class="col">
-    <div class="card border-0" [style.height]="cardHeight">
-        <img [src]="imagePath" class="card-img" alt="...">
+<article class="col h-100"  (click)="openPapelIndividualModal()" style="cursor: pointer;">
+    <div class="card border-0 h-100">
+        <img [src]="imagePath" class="card-img h-100" alt="...">
         <div class="card-img-overlay">
             <div class="custom-badge d-flex mt-auto position-absolute bottom-0 end-0">
                 <div class="badge-content">
@@ -10,3 +10,5 @@
         </div>
     </div>
 </article>
+
+<app-papel-individual [imagePath]="imagePath"></app-papel-individual>

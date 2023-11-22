@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { ModalPromocaoService } from 'src/app/shared/components/modal-promocao/modal-promocao.service';
 
 declare var $: any;
@@ -8,7 +8,7 @@ declare var $: any;
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.css']
 })
-export class BannerComponent {
+export class BannerComponent implements OnInit{
   constructor(
     private modalService: ModalPromocaoService,
     private el: ElementRef,

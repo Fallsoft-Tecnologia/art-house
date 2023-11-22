@@ -9,15 +9,12 @@ import { HeaderComponent } from './core/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DirectivesComponent } from './shared/directives/directives.component';
 import { WhatsappComponent } from './core/whatsapp/whatsapp.component';
-import { ModalPromocaoComponent } from './shared/components/modal-promocao/modal-promocao.component';
+import { ComponentsModule } from './shared/components/components.module';
 import { HomeModule } from './modules/home/home.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LeadDescontoFormComponent } from './shared/components/lead-desconto-form/lead-desconto-form.component';
-import { IConfig, NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
-import { NotificacaoComponent } from './shared/components/notificacao/notificacao.component';
-import { PapeisDeParedeComponent } from './modules/papeis-de-parede/papeis-de-parede.component';
+import { IConfig, provideNgxMask } from 'ngx-mask';
 import { PapeisDeParedeModule } from './modules/papeis-de-parede/papeis-de-parede.module';
-import { NgbCollapse, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapse, NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -27,22 +24,19 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     FooterComponent,
     HeaderComponent,
     DirectivesComponent,
-    WhatsappComponent,
-    ModalPromocaoComponent,
-    LeadDescontoFormComponent,
-    NotificacaoComponent,
-    PapeisDeParedeComponent
+    WhatsappComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxMaskDirective, 
-    NgxMaskPipe,
     ReactiveFormsModule,
+    ComponentsModule,
     HomeModule,
-    PapeisDeParedeModule
+    PapeisDeParedeModule,
+    NgbCollapseModule,
+    NgbModule
   ],
   providers: [provideNgxMask(), NgbCollapse],
   bootstrap: [AppComponent]

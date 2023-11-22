@@ -5,7 +5,7 @@
     height: 80px;
 }
 
-.navbar-nav .navbar-item {
+.navbar-nav .nav-item {
     color: var(--Branco);
     font-variant-numeric: lining-nums proportional-nums;
 }
@@ -16,11 +16,11 @@ button {
     border: unset;
 }
 
-.fa-filter-off:before {
-    content: "\f0b0";
-    /* Ícone "fa-filter-off" */
+.dropdown-menu {
+    width: 200px;
+    z-index: 1000;
 }
 
-.dropdown-menu {
-    max-width: 100%;
+.dropdown-menu .active {
+    background-color: var(--Cinza-claro);
 }

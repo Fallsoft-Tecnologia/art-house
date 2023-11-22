@@ -2,10 +2,6 @@
     border-radius: 5px;
 }
 
-.card .card-img {
-    height: 100%;
-}
-
 .custom-badge {
     background-color: var(--Azul-medio-claro);
     border-radius: 5px;

@@ -12,9 +12,13 @@
     --Botao-azul: #2065EF;
     --Botao-verde: #0EA045;
     --Azul-ativado: #0056b3;
+    --Cinza-ativado: #121212;
 }
 
-html, body { height: 100%; }
+body, html {
+    height: 100%;
+}
+
 body { 
     margin: 0;
     font-family: 'Raleway', 'Montserrat', sans-serif;

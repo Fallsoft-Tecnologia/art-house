@@ -8,10 +8,15 @@
     justify-content: center;
 }
 
-.papeis-container {
-    height: 100%;
+.filter {
+    max-width: 450px;
+    min-width: 250px;
+}
+
+.row {
     max-width: 100%;
 }
+
 
 h1 {
     color: var(--Branco);
