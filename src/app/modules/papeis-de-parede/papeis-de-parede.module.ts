@@ -5,13 +5,15 @@ import { CardsComponent } from './cards/cards.component';
 import { FiltroComponent } from './filtro/filtro.component';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { PapeisDeParedeComponent } from './papeis-de-parede.component';
+import { FiltroModalComponent } from './filtro/filtro-modal/filtro-modal.component';
 
 @NgModule({
   declarations: [
     PapeisDeParedeComponent,
     CabecalhoComponent,
     CardsComponent,
-    FiltroComponent
+    FiltroComponent,
+    FiltroModalComponent
   ],
   imports: [
     CommonModule,

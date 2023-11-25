@@ -7,7 +7,7 @@
     --Cinza-escuro: #353535;
     --Cinza-claro: #B3B3B3;
     --Cinza-claro-claro: #E7E8EB;
-    --Branco: #FFFFFF;
+    --Branco: #FAFAFA;
     --Azul-medio-claro: #889DC7;
     --Botao-azul: #2065EF;
     --Botao-verde: #0EA045;
@@ -22,16 +22,6 @@ body, html {
 body { 
     margin: 0;
     font-family: 'Raleway', 'Montserrat', sans-serif;
-    background-color: var(--Cinza-claro-claro);
-}
-
-h1 {
-    font-family: 'Montserrat';
-    font-weight: 400;
-}
-
-h2 {
-    font-family: 'Montserrat';
-    font-weight: 400;
+    background-color: var(--Branco);
 }
     

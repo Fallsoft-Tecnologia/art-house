@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { IconDefinition, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-papeis-de-parede',
@@ -10,8 +9,23 @@ export class PapeisDeParedeComponent {
   totalItems: number = 130;
   showFilter: boolean = true;
 
+  constructor() {
+    this.updateShowFilter(window.innerWidth);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.updateShowFilter((event.target as Window).innerWidth);
+  }
+
+  private updateShowFilter(windowWidth: number) {
+    this.showFilter = windowWidth >= 600;
+  }
+
   toggleFilter() {
-    this.showFilter = !this.showFilter;
+    if (window.innerWidth >= 600) {
+      this.showFilter = !this.showFilter;
+    }
   }
 
   changeSorting(event: any) {

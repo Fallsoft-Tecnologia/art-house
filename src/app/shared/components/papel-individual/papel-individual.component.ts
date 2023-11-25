@@ -14,7 +14,7 @@ export class PapelIndividualComponent implements AfterViewInit {
   constructor(private modalService: ModalService) {}
 
   ngAfterViewInit() {
-    this.modalService.openModal$.subscribe((imagePath) => {
+    this.modalService.openModalWithImage$.subscribe((imagePath) => {
       if (imagePath === this.imagePath) {
         this.openModal();
         this.updateModalSize();

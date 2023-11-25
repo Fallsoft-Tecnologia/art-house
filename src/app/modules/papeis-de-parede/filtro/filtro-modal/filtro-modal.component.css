@@ -1,0 +1,54 @@
+.modal-esquerda .modal-dialog {
+    animation: modal-esquerda-entrada 0.3s ease-in-out, modal-esquerda-saida 0.3s ease-in-out;
+}
+
+@keyframes modal-esquerda-entrada {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.modal-dialog {
+    margin-right: auto;
+    max-width: 70%;
+}
+
+.modal-content {
+    background-color: var(--Branco);
+}
+
+.filtro-titulo {
+    padding-bottom: 10px;
+    font-size: 18px;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0;
+}
+
+.form-check {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center; /* Alinha verticalmente */
+}
+
+.form-check-input {
+    margin-right: 10px;
+}
+
+.form-check-input, .imagem-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+}
+
+.form-check-label {
+    font-size: 14px;
+    font-weight: 500;
+}

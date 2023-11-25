@@ -1,17 +1,26 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FiltroService } from 'src/app/core/services/filtro.service';
 
 declare var $: any;
 
 @Component({
   selector: 'app-filtro-modal',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './filtro-modal.component.html',
-  styleUrl: './filtro-modal.component.css'
+  styleUrls: ['./filtro-modal.component.css']
 })
-export class FiltroModalComponent {
-  @Output() modalClosed = new EventEmitter<void>();
+export class FiltroModalComponent implements OnInit {
+
+  constructor(private modalService: FiltroService) {}
+
+  ngOnInit() {
+    this.modalService.getModalOpen().subscribe((open) => {
+      console.log("teste");
+      if (open) {
+        console.log("Abriu 3");
+        this.openModal();
+      }
+    });
+  }
 
   openModal() {
     $('#filtroModal').modal('show');
@@ -19,10 +28,5 @@ export class FiltroModalComponent {
 
   closeModal() {
     $('#filtroModal').modal('hide');
-    this.modalClosed.emit();
-  }
-
-  fundoModalClick() {
-    this.closeModal();
   }
 }

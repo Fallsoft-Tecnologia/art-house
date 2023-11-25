@@ -12,6 +12,6 @@ export class CardPapelDeParedeComponent {
   constructor(private modalService: ModalService) {}
 
   openPapelIndividualModal() {
-    this.modalService.openModal(this.imagePath);
+    this.modalService.openModalWithImage(this.imagePath);
   }
 }

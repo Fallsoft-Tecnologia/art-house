@@ -16,7 +16,6 @@ export class BannerComponent implements OnInit{
   ) { }
 
   openModal(): void {
-    console.log(this.modalService.shouldShowModal())
     $('#modalPromocao').modal('show');
     this.modalService.markModalAsShown();
   }

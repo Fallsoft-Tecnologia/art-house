@@ -4,11 +4,14 @@
             <li class="nav-item">
                 <button class="btn btn-dark px-3" (click)="toggleFilter()" data-bs-toggle="collapse"
                     data-bs-target="#filtro" aria-expanded="true" aria-controls="filtro">
-                    <i [ngClass]="{'fa-solid': filterOpened, 'fa-regular': !filterOpened}" class="fa-filter"></i> Filtros
+                    <i [ngClass]="{'fa-solid': filterOpened, 'fa-regular': !filterOpened}" class="fa-filter"></i>
+                    Filtros
                 </button>
-                |
-                <span class="px-3 align-middle">
-                    {{itemCount }} resultado(s)
+                <span class="d-none d-sm-inline-block align-middle">
+                    |
+                    <span class="ps-3">
+                        {{itemCount }} resultado(s)
+                    </span>
                 </span>
             </li>
             <li class="nav-item dropdown ms-auto">
@@ -16,7 +19,8 @@
                     Lançamentos
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end mt-2">
-                    <li><a class="dropdown-item d-flex active" (click)="changeSorting('lancamentos')">Lançamentos <i class="fa-solid fa-check ms-auto align-self-center"></i></a></li>
+                    <li><a class="dropdown-item d-flex active" (click)="changeSorting('lancamentos')">Lançamentos <i
+                                class="fa-solid fa-check ms-auto align-self-center"></i></a></li>
                     <li><a class="dropdown-item" (click)="changeSorting('maisVendidos')">Mais Vendidos</a></li>
                 </ul>
             </li>
