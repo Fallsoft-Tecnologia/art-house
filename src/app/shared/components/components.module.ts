@@ -6,6 +6,7 @@ import { ModalPromocaoComponent } from './modal-promocao/modal-promocao.componen
 import { NotificacaoComponent } from './notificacao/notificacao.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PapelIndividualComponent } from './papel-individual/papel-individual.component';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 
@@ -19,7 +20,9 @@ import { PapelIndividualComponent } from './papel-individual/papel-individual.co
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   exports: [
     CardPapelDeParedeComponent,
@@ -27,6 +30,7 @@ import { PapelIndividualComponent } from './papel-individual/papel-individual.co
     ModalPromocaoComponent,
     NotificacaoComponent,
     PapelIndividualComponent
-  ]
+  ],
+  providers: [provideNgxMask()]
 })
 export class ComponentsModule {}

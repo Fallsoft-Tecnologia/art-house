@@ -12,7 +12,7 @@ import { WhatsappComponent } from './core/whatsapp/whatsapp.component';
 import { ComponentsModule } from './shared/components/components.module';
 import { HomeModule } from './modules/home/home.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { IConfig, provideNgxMask } from 'ngx-mask';
+import { IConfig, NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { PapeisDeParedeModule } from './modules/papeis-de-parede/papeis-de-parede.module';
 import { NgbCollapse, NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -36,9 +36,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     HomeModule,
     PapeisDeParedeModule,
     NgbCollapseModule,
-    NgbModule
+    NgbModule,
   ],
-  providers: [provideNgxMask(), NgbCollapse],
+  providers: [NgbCollapse],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
