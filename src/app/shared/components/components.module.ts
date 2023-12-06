@@ -7,6 +7,8 @@ import { NotificacaoComponent } from './notificacao/notificacao.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PapelIndividualComponent } from './papel-individual/papel-individual.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { TituloPaginaComponent } from './titulo-pagina/titulo-pagina.component';
+import { BannerComponent } from './banner/banner.component';
 
 
 
@@ -16,7 +18,9 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     LeadDescontoFormComponent,
     ModalPromocaoComponent,
     NotificacaoComponent,
-    PapelIndividualComponent
+    PapelIndividualComponent,
+    TituloPaginaComponent,
+    BannerComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,9 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     LeadDescontoFormComponent,
     ModalPromocaoComponent,
     NotificacaoComponent,
-    PapelIndividualComponent
+    PapelIndividualComponent,
+    TituloPaginaComponent,
+    BannerComponent
   ],
   providers: [provideNgxMask()]
 })
