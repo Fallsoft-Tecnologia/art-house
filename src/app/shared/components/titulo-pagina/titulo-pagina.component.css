@@ -1,0 +1,14 @@
+.container-titulo {
+    background-color: var(--Cinza-escuro-escuro);
+    width: 100%;
+    height: 200px;
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    color: var(--Branco);
+    font-weight: 800;
+}
