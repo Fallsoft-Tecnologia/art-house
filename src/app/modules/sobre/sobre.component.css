@@ -4,7 +4,7 @@
     /* Garante que os filhos terão a mesma altura */
 }
 
-.col-6 p {
+.sobre p {
     flex-direction: column;
     justify-content: center;
     text-align: center;
@@ -12,7 +12,7 @@
     font-weight: 500;
 }
 
-.col-6 {
+.sobre {
     padding: 20px;
     /* Adiciona algum espaçamento interno para melhorar a aparência */
     box-sizing: border-box;
@@ -42,12 +42,16 @@ h2 {
     letter-spacing: 0.408px;
 }
 
+.container-valores {
+    max-width: 100%;
+}
+
 .container-valores img {
     height: 357px;
 }
 
 .container-valor {
-    padding: 50px 80px;
+    padding: 5vw 10vh;
 }
 
 .container-valor h3 {
