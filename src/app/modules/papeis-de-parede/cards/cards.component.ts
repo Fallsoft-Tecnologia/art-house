@@ -30,7 +30,7 @@ export class CardsComponent implements OnInit{
     };
   
     // Chame a API ou serviço para obter os dados paginados
-    this.http.post(`http://localhost:8080/api/produto/filtro?page=${this.currentPage}&size=5`,requestBody, { observe: 'response' }).subscribe((response: any) => {
+    this.http.post(`http://localhost:8080/api/produto/filtro?page=${this.currentPage}&size=20`,requestBody, { observe: 'response' }).subscribe((response: any) => {
       this.imageDataList = response.body.content;
       this.totalPages = response.body.totalPages;
     });
@@ -38,7 +38,8 @@ export class CardsComponent implements OnInit{
   
 
   getImageUrl(byteArray: Uint8Array): string {
-    return "data:image/png;base64," + byteArray;
+    const pathImage = "data:image/png;base64,";
+    return pathImage + byteArray;
   }
   
 
