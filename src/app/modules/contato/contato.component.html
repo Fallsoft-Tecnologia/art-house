@@ -1,1 +1,22 @@
-<p>contato works!</p>
+<app-titulo-pagina [titulo]="'Contato'"></app-titulo-pagina>
+
+<div class="container contact-section">
+    <div class="row mb-0">
+        <div class="col-12 col-md-6 col-lg-8 contact-info">
+            <p><a href="https://api.whatsapp.com/send?phone=5561986792057"><i class="fa-brands fa-whatsapp"></i> (61) 9 8679 - 2057</a></p>
+            <p><i class="fa-solid fa-phone"></i> (61) 3345 - 4363</p>
+            <p><i class="fa-solid fa-envelope"></i> arthouse751<span>&#64;</span>hotmail.com</p>
+            <p><a href="https://www.instagram.com/arthousepapel/"><i class="fa-brands fa-instagram"></i> <span> &#64;</span>arthousepapel</a></p>
+            <p><a href="https://www.facebook.com/art.house.papel.de.parede"><i class="fa-brands fa-facebook"></i> Art House Papel de Parede</a></p>
+            <p><i class="fa-solid fa-location-dot"></i> CLS 311, Bloco C, 29 - Asa Sul, Brasília - DF</p>
+        </div>
+        <div class="d-none d-md-block col-md-6 col-lg-4 contact-image">
+            <img src="assets/contato/contato.png" alt="" class="w-100">
+        </div>
+    </div>
+</div>
+<div class="divider"></div>
+<div class="container container-mensagem">
+    <h3 class="text-center">Envie uma mensagem para nós</h3>
+    <app-contato-form></app-contato-form>
+</div>

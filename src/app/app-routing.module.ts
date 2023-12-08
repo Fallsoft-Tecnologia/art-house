@@ -4,6 +4,7 @@ import { HomeComponent } from './modules/home/home.component';
 import { PapeisDeParedeComponent } from './modules/papeis-de-parede/papeis-de-parede.component';
 import { PersonalizadosComponent } from './modules/personalizados/personalizados.component';
 import { SobreComponent } from './modules/sobre/sobre.component';
+import { ContatoComponent } from './modules/contato/contato.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,9 @@ const routes: Routes = [
   },
   {
     path:'sobrenos', component: SobreComponent
+  },
+  {
+    path:'contato', component: ContatoComponent
   }
 ];
 

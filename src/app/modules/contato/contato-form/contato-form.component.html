@@ -1,0 +1,40 @@
+<form class="form-group row g-2 mb-5 needs-validation" novalidate [formGroup]="mensagemForm" (ngSubmit)="onSubmit()">
+    <div class="col-12">
+        <label for="nome" class="form-label">Insira seu nome completo</label>
+        <input type="text" class="form-control is-valid" id="nome" formControlName="nome" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="celular" class="form-label">Insira seu telefone</label>
+        <input type="text" class="form-control" id="celular" formControlName="celular">
+    </div>
+    <div class="col-md-6">
+        <label for="email" class="form-label">Insira seu e-mail</label>
+        <input type="email" class="form-control is-invalid" id="email" formControlName="email" 
+        aria-describedby="emailFeedback" required>
+        <div id="emailFeedback" class="invalid-feedback">
+            Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-12">
+        <label for="assunto" class="form-label">Insira o assunto</label>
+        <input type="text" class="form-control is-invalid" id="assunto" formControlName="assunto"
+            aria-describedby="assuntoFeedback" required>
+        <div id="assuntoFeedback" class="invalid-feedback">
+            Please provide a valid city.
+        </div>
+    </div>
+    <div class="col-md-12">
+        <label for="mensagem" class="form-label">Insira a mensagem</label>
+        <textarea class="form-control is-invalid" id="mensagem" formControlName="mensagem" rows="3"
+            aria-describedby="mensagemFeedback" required></textarea>
+        <div id="mensagemFeedback" class="invalid-feedback">
+            Please provide a valid city.
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Enviar</button>
+    </div>
+</form>
