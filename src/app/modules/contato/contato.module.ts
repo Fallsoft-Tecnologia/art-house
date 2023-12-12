@@ -4,6 +4,7 @@ import { ContatoComponent } from './contato.component';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { ContatoFormComponent } from './contato-form/contato-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 
@@ -15,7 +16,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ComponentsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
+  ],
+  providers: [provideNgxMask()]
 })
 export class ContatoModule { }

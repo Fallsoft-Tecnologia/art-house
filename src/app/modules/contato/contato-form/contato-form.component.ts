@@ -41,25 +41,26 @@ export class ContatoFormComponent {
     }
   }
 
-  private getLeadMensagemForm(): LeadMensagemForm {
+  getLeadMensagemForm(): LeadMensagemForm {
+    const { nome, email, celular, assunto, mensagem } = this.mensagemForm.value;
     return {
-      nome: this.mensagemForm.value.nome,
-      email: this.mensagemForm.value.email,
-      celular: this.mensagemForm.value.celular,
-      assunto: this.mensagemForm.value.assunto,
-      mensagem: this.mensagemForm.value.mensagem,
+      nome,
+      email,
+      celular: this.removerMascaraCelular(celular),
+      assunto,
+      mensagem,
     };
   }
 
   private enviarMensagem(leadMensagemForm: LeadMensagemForm): void {
     this.mensagemService.enviarMensagem(leadMensagemForm).subscribe({
-      next: (response) => {
-        this.handleSuccess(response);
-      },
-      error: (error) => {
-        this.handleError(error);
-      }
+      next: (response) => this.handleSuccess(response),
+      error: (error) => this.handleError(error),
     });
+  }
+
+  private removerMascaraCelular(celular: string | undefined): string | undefined {
+    return celular ? celular.replace(/\D/g, '') : undefined;
   }
 
   isCampoInvalido(campo: string): boolean {
