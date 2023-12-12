@@ -1,16 +1,16 @@
-<form class="form-group" [formGroup]="leadDescontoForm" (submit)="cadastrar()">
+<form class="form-group row mb-5 needs-validation" novalidate [formGroup]="leadDescontoForm" (submit)="cadastrar()">
     <div class="py-2">
         <label>Insira seu e-mail</label>
-        <input type="email" formControlName="email" class="form-control" placeholder="E-mail">
-        <div class="invalid-feedback">
-            Please choose a username.
+        <input type="email" formControlName="email" class="form-control is-invalid" placeholder="E-mail" aria-describedby="emailFeedback">
+        <div id="emailFeedback" class="invalid-feedback">
+            Por favor, digite seu e-mail.
         </div>
     </div>
     <div>
         <label>Ou insira seu whatsapp</label>
-        <input type="text" formControlName="celular" class="form-control" placeholder="Whatsapp" mask="(00) 00000-0000">
-        <div class="invalid-feedback">
-            Please choose a username.
+        <input type="text" formControlName="celular" class="form-control is-invalid" placeholder="Whatsapp" mask="(00) 00000-0000" aria-describedby="celularFeedback">
+        <div id="celularFeedback" class="invalid-feedback">
+            Por favor, digite seu celular.
         </div>
     </div>
     <div class="py-2">

@@ -1,5 +1,11 @@
 .form-group label {
     color: var(--Preto);
+    display: inline-flex;
+}
+
+.fa-asterisk {
+    font-size: 9px;
+    color: red;
 }
 
 .form-group input {

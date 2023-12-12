@@ -1,9 +1,10 @@
 <form class="form-group row g-2 mb-5 needs-validation" novalidate [formGroup]="mensagemForm" (ngSubmit)="onSubmit()">
     <div class="col-12">
-        <label for="nome" class="form-label">Insira seu nome completo</label>
-        <input type="text" class="form-control is-valid" id="nome" formControlName="nome" required>
-        <div class="valid-feedback">
-            Looks good!
+        <label for="nome" class="form-label">Insira seu nome completo <i class="fa-solid fa-asterisk"></i></label>
+        <input type="text" class="form-control" id="nome" formControlName="nome" required
+            [class.is-invalid]="isCampoInvalido('nome')">
+        <div *ngIf="campoTocado('nome') && mensagemForm.get('nome')?.hasError('required')" class="invalid-feedback">
+            Por favor, insira seu nome.
         </div>
     </div>
     <div class="col-md-6">
@@ -11,27 +12,31 @@
         <input type="text" class="form-control" id="celular" formControlName="celular">
     </div>
     <div class="col-md-6">
-        <label for="email" class="form-label">Insira seu e-mail</label>
-        <input type="email" class="form-control is-invalid" id="email" formControlName="email" 
-        aria-describedby="emailFeedback" required>
-        <div id="emailFeedback" class="invalid-feedback">
-            Please choose a username.
+        <label for="email" class="form-label">Insira seu e-mail <i class="fa-solid fa-asterisk"></i></label>
+        <input type="email" class="form-control" id="email" formControlName="email" required
+            [class.is-invalid]="isCampoInvalido('email')">
+        <div *ngIf="campoTocado('email') && (mensagemForm.get('email')?.hasError('email') || mensagemForm.get('email')?.hasError('required'))"
+            class="invalid-feedback">
+            {{ mensagemForm.get('email')?.hasError('email') ? 'Por favor, insira um e-mail válido.' : 'Campo
+            obrigatório.' }}
         </div>
     </div>
     <div class="col-md-12">
-        <label for="assunto" class="form-label">Insira o assunto</label>
-        <input type="text" class="form-control is-invalid" id="assunto" formControlName="assunto"
-            aria-describedby="assuntoFeedback" required>
-        <div id="assuntoFeedback" class="invalid-feedback">
-            Please provide a valid city.
+        <label for="assunto" class="form-label">Insira o assunto <i class="fa-solid fa-asterisk"></i></label>
+        <input type="text" class="form-control" id="assunto" formControlName="assunto" required
+            [class.is-invalid]="isCampoInvalido('assunto')">
+        <div *ngIf="campoTocado('assunto') && mensagemForm.get('assunto')?.hasError('required')"
+            class="invalid-feedback">
+            Por favor, forneça um assunto.
         </div>
     </div>
     <div class="col-md-12">
-        <label for="mensagem" class="form-label">Insira a mensagem</label>
-        <textarea class="form-control is-invalid" id="mensagem" formControlName="mensagem" rows="3"
-            aria-describedby="mensagemFeedback" required></textarea>
-        <div id="mensagemFeedback" class="invalid-feedback">
-            Please provide a valid city.
+        <label for="mensagem" class="form-label">Insira a mensagem <i class="fa-solid fa-asterisk"></i></label>
+        <textarea class="form-control" id="mensagem" formControlName="mensagem" rows="3" required
+            [class.is-invalid]="isCampoInvalido('mensagem')"></textarea>
+        <div *ngIf="campoTocado('mensagem') && mensagemForm.get('mensagem')?.hasError('required')"
+            class="invalid-feedback">
+            Por favor, forneça uma mensagem.
         </div>
     </div>
     <div class="col-12">
