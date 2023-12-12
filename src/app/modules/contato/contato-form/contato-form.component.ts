@@ -11,7 +11,7 @@ import { LeadMensagemForm } from 'src/app/shared/models/leadMensagemForm';
 })
 export class ContatoFormComponent {
 
-  mensagemForm: FormGroup = new FormGroup({});;
+  mensagemForm: FormGroup = new FormGroup({});
   formEnviado = false;
 
   constructor(
@@ -38,7 +38,6 @@ export class ContatoFormComponent {
     if (this.mensagemForm.valid) {
       const leadMensagemForm = this.getLeadMensagemForm();
       this.enviarMensagem(leadMensagemForm);
-      this.formEnviado = false;
     }
   }
 
@@ -56,22 +55,11 @@ export class ContatoFormComponent {
     this.mensagemService.enviarMensagem(leadMensagemForm).subscribe({
       next: (response) => {
         this.handleSuccess(response);
-        this.mensagemForm.reset();
       },
       error: (error) => {
         this.handleError(error);
       }
     });
-  }
-
-  private handleSuccess(response: any): void {
-    this.notificacaoService.mostrarNotificacao('Mensagem enviada com sucesso.', TipoNotificacao.Sucesso);
-  }
-
-  private handleError(error: any): void {
-    this.notificacaoService.mostrarNotificacao('Erro ao enviar mensagem. Por favor, tente novamente.', TipoNotificacao.Erro);
-    console.error('Erro ao enviar mensagem:', error);
-    // Trate o erro conforme necessário
   }
 
   isCampoInvalido(campo: string): boolean {
@@ -82,5 +70,16 @@ export class ContatoFormComponent {
   campoTocado(campo: string): boolean {
     const controle = this.mensagemForm.get(campo);
     return !!controle && (controle.touched || this.formEnviado);
+  }
+
+  private handleSuccess(response: any): void {
+    this.notificacaoService.mostrarNotificacao('Mensagem enviada com sucesso.', TipoNotificacao.Sucesso);
+    this.mensagemForm.reset();
+    this.formEnviado = false;
+  }
+
+  private handleError(error: any): void {
+    this.notificacaoService.mostrarNotificacao('Erro ao enviar mensagem. Por favor, tente novamente.', TipoNotificacao.Erro);
+    console.error('Erro ao enviar mensagem:', error);
   }
 }

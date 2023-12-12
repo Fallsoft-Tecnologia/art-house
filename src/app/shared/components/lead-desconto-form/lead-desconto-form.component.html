@@ -1,16 +1,18 @@
 <form class="form-group row mb-5 needs-validation" novalidate [formGroup]="leadDescontoForm" (submit)="cadastrar()">
     <div class="py-2">
         <label>Insira seu e-mail</label>
-        <input type="email" formControlName="email" class="form-control is-invalid" placeholder="E-mail" aria-describedby="emailFeedback">
-        <div id="emailFeedback" class="invalid-feedback">
-            Por favor, digite seu e-mail.
+        <input type="email" formControlName="email" class="form-control" placeholder="E-mail"
+            [class.is-invalid]="isCampoInvalido('email')">
+        <div *ngIf="isCampoInvalido('email')" class="invalid-feedback">
+            Por favor, digite um e-mail válido.
         </div>
     </div>
     <div>
         <label>Ou insira seu whatsapp</label>
-        <input type="text" formControlName="celular" class="form-control is-invalid" placeholder="Whatsapp" mask="(00) 00000-0000" aria-describedby="celularFeedback">
-        <div id="celularFeedback" class="invalid-feedback">
-            Por favor, digite seu celular.
+        <input type="text" formControlName="celular" class="form-control" placeholder="Whatsapp" mask="(00) 00000-0000"
+            [class.is-invalid]="isCampoInvalido('celular')">
+        <div *ngIf="isCampoInvalido('celular')" class="invalid-feedback">
+            Por favor, digite um número de celular válido.
         </div>
     </div>
     <div class="py-2">

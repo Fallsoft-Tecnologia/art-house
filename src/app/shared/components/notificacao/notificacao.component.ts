@@ -20,7 +20,7 @@ export class NotificacaoComponent implements OnInit {
       this.tipo = notificacao.tipo;
       setTimeout(() => {
         this.fecharNotificacao();
-      }, 10000);
+      }, 5000);
     });
   }
 
