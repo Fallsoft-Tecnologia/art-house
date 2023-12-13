@@ -1,0 +1,38 @@
+.form-group label {
+    color: var(--Preto);
+    display: inline-flex;
+}
+
+.fa-asterisk {
+    font-size: 9px;
+    color: red;
+}
+
+.form-group input {
+    height: 56px;
+}
+
+.form-group input, textarea {
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 16px;
+    font-weight: 600;
+    background: var(--Cinza-claro-claro);
+    border-radius: 2px;
+}
+
+.form-group input::placeholder, textarea::placeholder {
+    color: var(--Cinza-claro);
+}
+
+.form-group .btn {
+    font-size: 14px;
+    font-weight: 600;
+    height: 40px;
+    width: 130px;
+    background-color: var(--Botao-azul);
+    border-radius: 2px;
+}
+
+.form-group .btn:hover {
+    background-color: var(--Azul-ativado);
+}

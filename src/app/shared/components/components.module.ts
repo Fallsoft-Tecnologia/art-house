@@ -6,6 +6,9 @@ import { ModalPromocaoComponent } from './modal-promocao/modal-promocao.componen
 import { NotificacaoComponent } from './notificacao/notificacao.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PapelIndividualComponent } from './papel-individual/papel-individual.component';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { TituloPaginaComponent } from './titulo-pagina/titulo-pagina.component';
+import { BannerComponent } from './banner/banner.component';
 
 
 
@@ -15,18 +18,25 @@ import { PapelIndividualComponent } from './papel-individual/papel-individual.co
     LeadDescontoFormComponent,
     ModalPromocaoComponent,
     NotificacaoComponent,
-    PapelIndividualComponent
+    PapelIndividualComponent,
+    TituloPaginaComponent,
+    BannerComponent
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   exports: [
     CardPapelDeParedeComponent,
     LeadDescontoFormComponent,
     ModalPromocaoComponent,
     NotificacaoComponent,
-    PapelIndividualComponent
-  ]
+    PapelIndividualComponent,
+    TituloPaginaComponent,
+    BannerComponent
+  ],
+  providers: [provideNgxMask()]
 })
 export class ComponentsModule {}

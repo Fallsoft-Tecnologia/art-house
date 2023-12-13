@@ -1,0 +1,84 @@
+.contact-section {
+    padding: 50px 0;
+    display: flex;
+    align-items: stretch;
+}
+
+.contact-info {
+    padding: 15px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    flex: 1;
+    /* Garante que a .contact-info ocupa o espaço disponível */
+}
+
+.contact-info p {
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 0.336px;
+    padding: 15px;
+}
+
+.contact-info a {
+    text-decoration: none;
+    color: var(--Preto);
+}
+
+.contact-info i {
+    font-size: 26px;
+    padding-right: 5px;
+}
+
+.contact-image img {
+    border-radius: 8px;
+    object-fit: cover;
+    height: 100%;
+}
+
+.divider {
+    background: var(--Cinza-escuro-escuro);
+    height: 80px;
+}
+
+@media (max-width: 768px) {
+    .row {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .contact-info p {
+        font-size: 18px;
+        /* Ajuste o tamanho conforme necessário */
+    }
+
+    .contact-info i {
+        font-size: 28px;
+        /* Ajuste o tamanho conforme necessário */
+    }
+}
+
+/* Estilos para telas menores que 425px */
+
+@media (max-width: 425px) {
+    .contact-info p {
+        font-size: 16px;
+        /* Ajuste o tamanho conforme necessário */
+    }
+
+    .contact-info i {
+        font-size: 24px;
+        /* Ajuste o tamanho conforme necessário */
+    }
+}
+
+.container-mensagem {
+    margin-top: 30px;
+}
+
+.container-mensagem h3 {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 0.408px;
+    padding: 15px;
+}

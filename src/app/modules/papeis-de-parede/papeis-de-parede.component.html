@@ -1,6 +1,4 @@
-<section class="container-titulo">
-    <h1>Papeis de parede</h1>
-</section>
+<app-titulo-pagina [titulo]="'Papeis de parede'"></app-titulo-pagina>
 <app-cabecalho [itemCount]="totalItems" (filterToggle)="toggleFilter()" (sortingChanged)="changeSorting($event)"></app-cabecalho>
 <div [ngClass]="{'row': showFilter}">
     <div class="filter col-lg-4 col-md-3 col-auto" *ngIf="showFilter">

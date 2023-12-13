@@ -11,10 +11,15 @@ import { NotificacaoService, TipoNotificacao } from '../notificacao/notificacao.
 })
 export class LeadDescontoFormComponent implements OnInit {
   leadDescontoForm: FormGroup = new FormGroup({});
-  successMessage: string = 'Seu cadastro foi realizado com sucesso!';
-  errorMessage: string = 'Seu cadastro falhou!';
+  successMessage = 'Seu cadastro foi realizado com sucesso!';
+  errorMessage = 'Seu cadastro falhou!';
+  submitted = false;
 
-  constructor(private fb: FormBuilder, private leadService: LeadService, private notificacaoService: NotificacaoService) {}
+  constructor(
+    private fb: FormBuilder,
+    private leadService: LeadService,
+    private notificacaoService: NotificacaoService
+  ) { }
 
   ngOnInit() {
     this.initForm();
@@ -28,31 +33,47 @@ export class LeadDescontoFormComponent implements OnInit {
   }
 
   cadastrar() {
-    const celularValue = this.leadDescontoForm.get('celular')?.value.replace(/\D/g, '');
-    
-    if (this.leadDescontoForm.get("email")?.value || this.leadDescontoForm.get('celular')?.value) {
-      if (this.leadDescontoForm.valid) {
-        const leadDesconto: LeadDescontoForm = {
-          email: this.leadDescontoForm.get('email')?.value,
-          celular: celularValue
-        };
-  
-        this.leadService.createLead(leadDesconto).subscribe({
-          next: () => {
-            this.notificacaoService.mostrarNotificacao(this.successMessage, TipoNotificacao.Sucesso);
-            this.leadDescontoForm.reset();
-          },
-          error: (error) => {
-            this.notificacaoService.mostrarNotificacao(this.errorMessage, TipoNotificacao.Erro);
-            console.error('Erro ao cadastrar o lead:', error);
-          }
-        });
-      } else {
-        this.notificacaoService.mostrarNotificacao(this.errorMessage, TipoNotificacao.Erro);
-      }
+    this.submitted = true;
+
+    if (this.leadDescontoForm.valid && this.atLeastOneRequired('email', 'celular')) {
+      const celularValue = this.leadDescontoForm.get('celular')?.value.replace(/\D/g, '');
+
+      const leadDesconto: LeadDescontoForm = {
+        email: this.leadDescontoForm.get('email')?.value,
+        celular: celularValue
+      };
+
+      this.leadService.createLead(leadDesconto).subscribe({
+        next: () => {
+          this.handleSuccess();
+        },
+        error: (error) => {
+          this.handleError(error);
+        }
+      });
     } else {
-      this.notificacaoService.mostrarNotificacao(`${this.errorMessage} Preencha pelo menos um dos campos (email ou celular).`, TipoNotificacao.Erro);
-      console.log('Preencha pelo menos um dos campos (email ou celular).');
+      this.notificacaoService.mostrarNotificacao(this.errorMessage, TipoNotificacao.Erro);
     }
+  }
+
+  isCampoInvalido(campo: string): boolean {
+    const controle = this.leadDescontoForm.get(campo);
+    return !!controle && (controle.invalid || (this.submitted && controle.pristine));
+  }
+
+  private atLeastOneRequired(...controlNames: string[]) {
+    const controls = controlNames.map(name => this.leadDescontoForm.controls[name]);
+    return controls.some(control => !!control.value);
+  }
+
+  private handleSuccess() {
+    this.notificacaoService.mostrarNotificacao(this.successMessage, TipoNotificacao.Sucesso);
+    this.leadDescontoForm.reset();
+    this.submitted = false;
+  }
+
+  private handleError(error: any) {
+    this.notificacaoService.mostrarNotificacao(this.errorMessage, TipoNotificacao.Erro);
+    console.error('Erro ao cadastrar o lead:', error);
   }
 }
