@@ -8,6 +8,7 @@ import { ModalService } from 'src/app/core/services/modal.service';
 })
 export class CardPapelDeParedeComponent {
   @Input() imagePath: string = '';
+  @Input() grupo: string = '';
 
   constructor(private modalService: ModalService) {}
 
