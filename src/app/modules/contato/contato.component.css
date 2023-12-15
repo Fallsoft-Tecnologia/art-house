@@ -38,7 +38,7 @@
 
 .divider {
     background: var(--Cinza-escuro-escuro);
-    height: 80px;
+    height: 40px;
 }
 
 @media (max-width: 768px) {

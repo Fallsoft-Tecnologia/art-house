@@ -1,6 +1,7 @@
 footer {
     background-color: var(--Cinza-escuro-escuro);
     border-top: 1px solid var(--Branco);
+    font-variant-numeric: lining-nums proportional-nums;
 }
 
 

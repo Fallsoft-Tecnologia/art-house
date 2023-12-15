@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-12">
         <label for="mensagem" class="form-label">Insira a mensagem <i class="fa-solid fa-asterisk"></i></label>
-        <textarea class="form-control" id="mensagem" formControlName="mensagem" rows="3" placeholder="Digite a mensagem" required
+        <textarea class="form-control" id="mensagem" formControlName="mensagem" rows="3" data-ls-module="charCounter" maxlength="2000" placeholder="Digite a mensagem" required
             [class.is-invalid]="isCampoInvalido('mensagem')"></textarea>
         <div *ngIf="campoTocado('mensagem') && mensagemForm.get('mensagem')?.hasError('required')"
             class="invalid-feedback">
