@@ -2,6 +2,10 @@
     font-variant-numeric: lining-nums proportional-nums;
 }
 
+.page-item {
+    cursor: pointer;
+}
+
 .page-item .disabled {
     color: var(--Cinza-claro);
 }

@@ -1,60 +1,26 @@
-<section class="container min-vh-100 mb-5">
+<section class="container mb-5">
     <div class="row row-cols-xl-4 row-cols-md-3 row-cols-2 g-4 mt-2 d-flex justify-content-center d-grid gap-auto">
-        <app-card-papel-de-parede
-            imagePath="assets/papeisDeParede/5E050406.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tipo="Lançamentos"
-            imagePath="assets/papeisDeParede/5E050407.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050408.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050501.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050502.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050504.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050505.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050506.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050507.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050508.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050509.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050510.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050511.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050512.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050601.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050701.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050702.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050703.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050704.jpg"></app-card-papel-de-parede>
-        <app-card-papel-de-parede tamanho="pequeno"
-            imagePath="assets/papeisDeParede/5E050705.jpg"></app-card-papel-de-parede>
+        <div *ngFor="let imageData of imageDataList">
+            <app-card-papel-de-parede grupo="Lançamentos"
+                [imagePath]="getImageUrl(imageData.contProduto)"></app-card-papel-de-parede>
+        </div>
     </div>
 </section>
 
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center gap-1">
         <li class="page-item">
-            <span class="page-link disabled" aria-label="Previous">
+            <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous"
+                [class.disabled]="currentPage === 0">
                 <i class="fa-solid fa-angle-left align-middle" aria-hidden="true"></i>
-            </span>
+            </a>
         </li>
-        <li class="page-item"><span class="page-link active" aria-current="page">1</span></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item align">
-            <a class="page-link" href="#" aria-label="Next">
+        <li class="page-item" *ngFor="let page of getPages(totalPages)">
+            <a class="page-link" (click)="changePage(page)" [class.active]="currentPage === (page - 1)">{{ page }}</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" (click)="changePage(currentPage + 2)" aria-label="Next"
+                [class.disabled]="currentPage === totalPages - 1">
                 <i class="fa-solid fa-angle-right align-middle" aria-hidden="true"></i>
             </a>
         </li>
