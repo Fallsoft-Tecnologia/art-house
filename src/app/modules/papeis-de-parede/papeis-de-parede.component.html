@@ -6,6 +6,7 @@
     </div>
     <div class="justify-content-center text-center" [ngClass]="{'col': showFilter, 'col-auto': !showFilter}">
         <app-cards></app-cards>
+        <app-paginacao [currentPage]="currentPage" (pageChange)="onPageChange($event)"></app-paginacao>
     </div>
 </div>
 
