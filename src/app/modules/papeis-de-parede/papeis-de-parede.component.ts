@@ -8,24 +8,42 @@ import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
   styleUrls: ['./papeis-de-parede.component.css']
 })
 export class PapeisDeParedeComponent implements OnInit {
-  totalItems: number = 130;
+  imageDataList: any[] = [];
+  totalItems: number = 0;
   showFilter: boolean = true;
   currentPage: number = 1;
+  pageSize: number = 9;
+  totalPages: number = 0;
+  filtro: WallpaperFilter = {
+    cores: [],
+    caracteristicas: []
+  };
 
   constructor(private filtroService: FiltroService) {
     this.updateShowFilter(window.innerWidth);
   }
 
   ngOnInit(): void {
-    const filtroInicial: WallpaperFilter = {
-      cores: [''],
-      caracteristicas: ['']
-    };
+    this.carregarProdutos();
+  }
 
-    this.filtroService.filtrarWallpapers(filtroInicial, 1, 20).subscribe(data => {
-      // Faça algo com os dados (por exemplo, atribua a uma propriedade no seu componente)
-      console.log('Dados iniciais:', data);
-    });
+  carregarProdutos(): void {
+    this.filtroService.listrarProdutosFiltrados(this.filtro, this.currentPage - 1, this.pageSize)
+    .subscribe((response: any) => {
+      this.imageDataList = response.content;
+      this.totalPages = response.totalPages;
+      this.totalItems = response.totalElements;
+    })
+  }
+
+  onPageChange(newPage: number): void {
+    this.currentPage = newPage;
+    this.carregarProdutos();
+  }
+
+  onFiltroChanged(novoFiltro: WallpaperFilter): void {
+    this.filtro = novoFiltro;
+    this.carregarProdutos();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -45,10 +63,5 @@ export class PapeisDeParedeComponent implements OnInit {
 
   changeSorting(event: any) {
     const selectedOption: string = event;
-  }
-
-  onPageChange(newPage: number) {
-    this.currentPage = newPage;
-    this.filtroService.atualizarPagina(newPage);
   }
 }

@@ -11,13 +11,11 @@
                 </h2>
                 <div id="filtroCores" class="accordion-collapse collapse show">
                     <div class="accordion-body d-grid gap-2 border-0">
-                        <button *ngFor="let cor of cores" class="btn btn-dark d-flex border-0"
-                            (click)="toggleCor(cor.idCor)">
+                        <button *ngFor="let cor of cores" class="btn btn-dark d-flex border-0">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                    [checked]="selectedCores.includes(cor.idCor)">
-                                <label class="form-check-label mt-1 ps-2" for="{{ cor.idCor }}">{{ cor.nomeCor
-                                    }}</label>
+                                <input class="form-check-input" type="checkbox" id="{{ cor.nomeCor }}"
+                                [checked]="filtro.cores?.includes(cor.nomeCor)" (change)="toggleFiltro(cor.nomeCor, 'cores')">
+                                <label class="form-check-label mt-1 ps-2" for="{{ cor.nomeCor }}">{{ cor.nomeCor }}</label>
                             </div>
                             <img class="ms-auto align-self-center" src="/assets/filtro/amarelo.jpeg"
                                 alt="{{ cor.nomeCor }}" style="border-radius: 4px;">
@@ -36,13 +34,11 @@
                 </h2>
                 <div id="filtroTipos" class="accordion-collapse collapse show">
                     <div class="accordion-body d-grid gap-2 border-0">
-                        <button *ngFor="let tipo of tipos" class="btn btn-dark d-flex border-0"
-                            (click)="toggleTipo(tipo.idCaracteristicas)">
+                        <button *ngFor="let tipo of tipos" class="btn btn-dark d-flex border-0">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                    [checked]="selectedTipos.includes(tipo.idCaracteristicas)">
-                                <label class="form-check-label mt-1 ps-2" for="{{ tipo.idCaracteristicas }}">{{
-                                    tipo.nomeCaracterisiticas }}</label>
+                                <input class="form-check-input" type="checkbox" id="{{ tipo.nomeCaracterisiticas }}"
+                                [checked]="filtro.caracteristicas?.includes(tipo.nomeCaracterisiticas)" (change)="toggleFiltro(tipo.nomeCaracterisiticas, 'caracteristicas')">
+                                <label class="form-check-label mt-1 ps-2" for="{{ tipo.nomeCaracterisiticas }}">{{ tipo.nomeCaracterisiticas }}</label>
                             </div>
                             <img class="ms-auto align-self-center" src="/assets/papeisDeParede/3d.webp"
                                 alt="{{ tipo.nomeCaracterisiticas }}" style="border-radius: 4px;">

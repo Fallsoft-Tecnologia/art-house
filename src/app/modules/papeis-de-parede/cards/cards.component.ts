@@ -1,7 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { FiltroService } from 'src/app/core/services/filtro.service';
-import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-cards',
@@ -9,27 +6,14 @@ import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
   styleUrls: ['./cards.component.css']
 })
 export class CardsComponent implements OnInit, OnDestroy {
-  imageDataList: any[] = [];
+  @Input() imageDataList: any[] = [];
 
-  filtroSubscription: Subscription = new Subscription();
-
-  constructor(private filtroService: FiltroService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.filtroSubscription = this.filtroService.filtroChange.subscribe(() => this.loadImages());
-    this.loadImages();
   }
 
   ngOnDestroy(): void {
-    this.filtroSubscription.unsubscribe();
-  }
-
-  loadImages(): void {
-    const { getCurrentPage, getPageSize, getFiltro } = this.filtroService;
-
-    this.filtroService.filtrarWallpapers(getFiltro(), getCurrentPage(), getPageSize()).subscribe(data => {
-      this.imageDataList = data.content;
-    });
   }
 
   getImageUrl(byteArray: Uint8Array): string {

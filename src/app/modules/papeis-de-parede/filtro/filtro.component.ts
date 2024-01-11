@@ -10,10 +10,15 @@ import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
   styleUrls: ['./filtro.component.css']
 })
 export class FiltroComponent implements OnInit {
-  cores: { idCor: number, nomeCor: string }[] = [];
+  cores: { idCor: number, nomeCor: string, imgCor: string }[] = [];
   tipos: { idCaracteristicas: number, nomeCaracterisiticas: string, imgCaracteristicas: string }[] = [];
-  selectedCores: number[] = [];
-  selectedTipos: number[] = [];
+  
+  @Input() filtro: WallpaperFilter = {
+    cores: [],
+    caracteristicas: [],
+  };
+
+  @Output() filtroChanged = new EventEmitter<WallpaperFilter>();
 
   filtroDivClass: string = 'container-filtro float-start w-100 d-none';
 
@@ -35,39 +40,19 @@ export class FiltroComponent implements OnInit {
     });
   }
 
-  aplicarFiltro() {
-    console.log('Selected Cores:', this.selectedCores);
-    console.log('Selected Tipos:', this.selectedTipos);
+  toggleFiltro(nome: string, tipo: 'cores' | 'caracteristicas'): void {
+    if (this.filtro[tipo]?.includes(nome)) {
+      this.filtro[tipo] = this.filtro[tipo]?.filter(item => item !== nome);
+    } else {
+      this.filtro[tipo]?.push(nome);
+    }
 
-    const filtro: WallpaperFilter = {
-      cores: this.selectedCores.map(id => id.toString()),
-      caracteristicas: this.selectedTipos.map(id => id.toString())
-    };
-
-    console.log('Filtro:', filtro);
-
-    this.filtroService.filtrarWallpapers(filtro, 1, 20).subscribe(data => {
-      console.log('Resultado do Filtro:', data);
-      // Atualize os dados dos papéis de parede no componente Cards (pode ser utilizando um serviço ou EventEmitter)
-    });
+    console.log(this.filtro)
+    this.emitFiltroChange();
   }
 
-  toggleCor(idCor: number) {
-    if (this.selectedCores.includes(idCor)) {
-      this.selectedCores = this.selectedCores.filter(id => id !== idCor);
-    } else {
-      this.selectedCores.push(idCor);
-    }
-    this.aplicarFiltro();
-  }
-
-  toggleTipo(idTipo: number) {
-    if (this.selectedTipos.includes(idTipo)) {
-      this.selectedTipos = this.selectedTipos.filter(id => id !== idTipo);
-    } else {
-      this.selectedTipos.push(idTipo);
-    }
-    this.aplicarFiltro();
+  emitFiltroChange(): void {
+    this.filtroChanged.emit(this.filtro);
   }
 
   getImageUrl(byteArray: Uint8Array): string {

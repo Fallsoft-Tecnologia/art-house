@@ -26,17 +26,12 @@ export class FiltroService {
     return this.http.get(`${this.baseUrl}/cores`);
   }
 
-  filtrarWallpapers(filter: WallpaperFilter, page: number, size: number): Observable<WallpaperResponse> {
+  listrarProdutosFiltrados(filter: WallpaperFilter, page: number, size: number): Observable<WallpaperResponse> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
   
-    return this.http.post<WallpaperResponse>(`${this.baseUrl}`, filter, { params }).pipe(
-      tap(() => {
-        this.atualizarFiltro(filter);
-        this.atualizarPagina(page);
-      })
-    );
+    return this.http.post<WallpaperResponse>(`${this.baseUrl}`, filter, { params });
   }
 
   atualizarPagina(pagina: number) {
