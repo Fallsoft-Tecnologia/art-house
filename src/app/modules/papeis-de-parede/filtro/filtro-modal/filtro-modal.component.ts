@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FiltroService } from 'src/app/core/services/filtro.service';
+import { FiltroModalService } from 'src/app/core/services/filtroModal.service';
 
 declare var $: any;
 
@@ -10,7 +10,7 @@ declare var $: any;
 })
 export class FiltroModalComponent implements OnInit {
 
-  constructor(private modalService: FiltroService) {}
+  constructor(private modalService: FiltroModalService) {}
 
   ngOnInit() {
     this.modalService.getModalOpen().subscribe((open) => {

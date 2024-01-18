@@ -5,6 +5,7 @@
 
 button {
     background-color: var(--Cinza-escuro-escuro);
+    font-variant-numeric: lining-nums proportional-nums;
 }
 
 .accordion-button {

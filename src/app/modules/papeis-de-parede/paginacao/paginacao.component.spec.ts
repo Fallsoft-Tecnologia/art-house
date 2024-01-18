@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PapelIndividualComponent } from './papel-individual.component';
+import { PaginacaoComponent } from './paginacao.component';
 
-describe('PapelIndividualComponent', () => {
-  let component: PapelIndividualComponent;
-  let fixture: ComponentFixture<PapelIndividualComponent>;
+describe('PaginacaoComponent', () => {
+  let component: PaginacaoComponent;
+  let fixture: ComponentFixture<PaginacaoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PapelIndividualComponent]
+      imports: [PaginacaoComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(PapelIndividualComponent);
+    fixture = TestBed.createComponent(PaginacaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

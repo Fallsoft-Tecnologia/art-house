@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
-import { FiltroService } from 'src/app/core/services/filtro.service';
+import { FiltroModalService } from 'src/app/core/services/filtroModal.service';
 import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class CabecalhoComponent {
 
   filterOpened: boolean = true;
 
-  constructor(private ngbCollapse: NgbCollapse, private modalService: FiltroService) {
+  constructor(private ngbCollapse: NgbCollapse, private modalService: FiltroModalService) {
     this.updateFilterOpened(window.innerWidth);
   }
 

@@ -1,11 +1,13 @@
+<span #papeisDeParedeContainer></span>
 <app-titulo-pagina [titulo]="'Papeis de parede'"></app-titulo-pagina>
 <app-cabecalho [itemCount]="totalItems" (filterToggle)="toggleFilter()" (sortingChanged)="changeSorting($event)"></app-cabecalho>
 <div [ngClass]="{'row': showFilter}">
     <div class="filter col-lg-4 col-md-3 col-auto" *ngIf="showFilter">
-        <app-filtro></app-filtro>
+        <app-filtro [filtro]="filtro" (filtroChanged)="onFiltroChanged($event)"></app-filtro>
     </div>
     <div class="justify-content-center text-center" [ngClass]="{'col': showFilter, 'col-auto': !showFilter}">
-        <app-cards></app-cards>
+        <app-cards [imageDataList] = imageDataList></app-cards>
+        <app-paginacao [totalPages]="totalPages" [currentPage]="currentPage" (pageChange)="onPageChange($event)"></app-paginacao>
     </div>
 </div>
 

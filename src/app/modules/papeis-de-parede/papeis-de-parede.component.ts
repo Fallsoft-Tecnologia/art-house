@@ -1,16 +1,52 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { FiltroService } from 'src/app/core/services/filtro.service';
+import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
 
 @Component({
   selector: 'app-papeis-de-parede',
   templateUrl: './papeis-de-parede.component.html',
   styleUrls: ['./papeis-de-parede.component.css']
 })
-export class PapeisDeParedeComponent {
-  totalItems: number = 130;
+export class PapeisDeParedeComponent implements OnInit {
+  imageDataList: any[] = [];
+  totalItems: number = 0;
   showFilter: boolean = true;
+  currentPage: number = 1;
+  pageSize: number = 9;
+  totalPages: number = 0;
+  filtro: WallpaperFilter = {
+    cores: [],
+    caracteristicas: []
+  };
 
-  constructor() {
+  @ViewChild('papeisDeParedeContainer') papeisDeParedeContainer!: ElementRef;
+
+  constructor(private filtroService: FiltroService) {
     this.updateShowFilter(window.innerWidth);
+  }
+
+  ngOnInit(): void {
+    this.carregarProdutos();
+  }
+
+  carregarProdutos(): void {
+    this.filtroService.listrarProdutosFiltrados(this.filtro, this.currentPage - 1, this.pageSize)
+    .subscribe((response: any) => {
+      this.imageDataList = response.content;
+      this.totalPages = response.totalPages;
+      this.totalItems = response.totalElements;
+    })
+  }
+
+  onPageChange(newPage: number): void {
+    this.currentPage = newPage;
+    this.carregarProdutos();
+    this.scrollContainerToTop();
+  }
+
+  onFiltroChanged(novoFiltro: WallpaperFilter): void {
+    this.filtro = novoFiltro;
+    this.carregarProdutos();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -30,5 +66,10 @@ export class PapeisDeParedeComponent {
 
   changeSorting(event: any) {
     const selectedOption: string = event;
+  }
+
+  scrollContainerToTop() {
+    const containerElement = this.papeisDeParedeContainer.nativeElement;
+    containerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }

@@ -6,6 +6,7 @@ import { FiltroComponent } from './filtro/filtro.component';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { PapeisDeParedeComponent } from './papeis-de-parede.component';
 import { FiltroModalComponent } from './filtro/filtro-modal/filtro-modal.component';
+import { PaginacaoComponent } from './paginacao/paginacao.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { FiltroModalComponent } from './filtro/filtro-modal/filtro-modal.compone
     CabecalhoComponent,
     CardsComponent,
     FiltroComponent,
-    FiltroModalComponent
+    FiltroModalComponent,
+    PaginacaoComponent
   ],
   imports: [
     CommonModule,
