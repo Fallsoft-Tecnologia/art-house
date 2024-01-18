@@ -21,21 +21,21 @@
                             </article>
                             <article class="mt-3 mb-3">
                                 <h2>Calcular rolos de papéis</h2>
-                                <form class="row row-cols-lg-3 g-3 align-items-end" action="">
+                                <form class="row row-cols-lg-3 g-3 align-items-end" (ngSubmit)="submitForm()" [formGroup]="formulario">
                                     <div class="col-12">
                                         <label for="largura" class="form-label">Largura:</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="largura" placeholder="000"
-                                                aria-describedby="campo-l">
-                                            <span class="input-group-text" id="campo-l">cm</span>
+                                            <input type="number" class="form-control" id="largura" name="largura" placeholder="000" formControlName="largura"
+                                                aria-describedby="larguraCentimetros" required>
+                                            <span class="input-group-text" id="larguraCentimetros">cm</span>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <label for="altura" class="form-label text">Altura:</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="altura" placeholder="000"
-                                                aria-describedby="campo-c">
-                                            <span class="input-group-text" id="campo-c">cm</span>
+                                            <input type="number" class="form-control" id="altura" name="altura" placeholder="000" formControlName="altura"
+                                                aria-describedby="alturaCentimetros" required>
+                                            <span class="input-group-text" id="alturaCentimetros">cm</span>
                                         </div>
                                     </div>
                                     <div class="col-12 align-content-end">
@@ -43,7 +43,7 @@
                                     </div>
                                 </form>
 
-                                <p class="mt-3 text-center"></p>
+                                <p class="mt-3 text-center" *ngIf="numeroDeRolos">{{ numeroDeRolos }}</p>
                             </article>
 
                             <article class="d-grid mt-auto">
