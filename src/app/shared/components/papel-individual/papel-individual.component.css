@@ -44,7 +44,7 @@
     border-radius: 2px;
     height: 40px;
 }
-.form-control {
+.form-control, p {
     font-variant-numeric: lining-nums proportional-nums;
 }
 

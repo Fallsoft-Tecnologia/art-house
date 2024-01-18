@@ -14,8 +14,6 @@ export class PaginacaoComponent implements OnInit{
   
   paginaSubscription: Subscription = new Subscription();
 
-  constructor(private filtroService: FiltroService) { }
-
   ngOnInit(): void {
   }
 

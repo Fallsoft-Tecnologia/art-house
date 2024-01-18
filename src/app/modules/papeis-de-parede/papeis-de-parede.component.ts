@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FiltroService } from 'src/app/core/services/filtro.service';
 import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
 
@@ -18,6 +18,8 @@ export class PapeisDeParedeComponent implements OnInit {
     cores: [],
     caracteristicas: []
   };
+
+  @ViewChild('papeisDeParedeContainer') papeisDeParedeContainer!: ElementRef;
 
   constructor(private filtroService: FiltroService) {
     this.updateShowFilter(window.innerWidth);
@@ -39,6 +41,7 @@ export class PapeisDeParedeComponent implements OnInit {
   onPageChange(newPage: number): void {
     this.currentPage = newPage;
     this.carregarProdutos();
+    this.scrollContainerToTop();
   }
 
   onFiltroChanged(novoFiltro: WallpaperFilter): void {
@@ -63,5 +66,10 @@ export class PapeisDeParedeComponent implements OnInit {
 
   changeSorting(event: any) {
     const selectedOption: string = event;
+  }
+
+  scrollContainerToTop() {
+    const containerElement = this.papeisDeParedeContainer.nativeElement;
+    containerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }

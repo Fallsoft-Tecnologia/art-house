@@ -10,6 +10,7 @@ declare var $: any;
 })
 export class PapelIndividualComponent implements AfterViewInit {
   @Input() imagePath: string = '';
+  numeroDeRolos: number = 4;
 
   constructor(private modalService: ModalService) {}
 
@@ -47,11 +48,19 @@ export class PapelIndividualComponent implements AfterViewInit {
   private updateRowGap() {
     const isFullScreen = window.innerWidth <= 767;
     const rowDiv = $('#papelIndividual .modal-body .row');
+    const pElement = $('#papelIndividual .modal-body .mt-3.text-center');
 
     if (isFullScreen) {
       rowDiv.addClass('d-grid gap-4');
     } else {
       rowDiv.removeClass('d-grid gap-4');
+    }
+
+    if (this.numeroDeRolos > 0) {
+      pElement.text(`Você irá precisar de ${this.numeroDeRolos} rolos`);
+      pElement.show();
+    } else {
+      pElement.hide();
     }
   }
 }
