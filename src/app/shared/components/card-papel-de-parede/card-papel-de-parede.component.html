@@ -2,7 +2,7 @@
     <div class="card border-0 h-100">
         <img [src]="imagePath" class="card-img h-100" alt="...">
         <div class="card-img-overlay">
-            <div *ngIf="grupo !== ''" class="custom-badge d-flex mt-auto position-absolute bottom-0 end-0">
+            <div *ngIf="grupo !== 'Normal' && grupo !== null" class="custom-badge d-flex mt-auto position-absolute bottom-0 end-0">
                 <div class="badge-content">
                     {{ grupo }}
                 </div>
