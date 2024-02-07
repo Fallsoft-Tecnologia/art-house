@@ -16,14 +16,25 @@
             </li>
             <li class="nav-item dropdown ms-auto">
                 <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    Lançamentos
+                    {{ selectedItem === 0 ? 'Lançamentos' : 'Mais Vendidos' }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end mt-2">
-                    <li><a class="dropdown-item d-flex active" (click)="changeSorting('lancamentos')">Lançamentos <i
-                                class="fa-solid fa-check ms-auto align-self-center"></i></a></li>
-                    <li><a class="dropdown-item" (click)="changeSorting('maisVendidos')">Mais Vendidos</a></li>
+                    <li>
+                        <a class="dropdown-item d-flex" (click)="changeSorting(0)">
+                            Lançamentos
+                            <i *ngIf="selectedItem === 0" class="fa-solid fa-check ms-auto align-self-center"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" (click)="changeSorting(1)">
+                            Mais Vendidos
+                            <i *ngIf="selectedItem === 1" class="fa-solid fa-check ms-auto align-self-center"></i>
+                        </a>
+                    </li>
                 </ul>
             </li>
+            
+            
         </ul>
     </div>
 </nav>

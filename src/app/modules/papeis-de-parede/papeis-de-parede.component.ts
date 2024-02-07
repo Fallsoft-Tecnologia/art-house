@@ -16,7 +16,8 @@ export class PapeisDeParedeComponent implements OnInit {
   totalPages: number = 0;
   filtro: WallpaperFilter = {
     cores: [],
-    caracteristicas: []
+    caracteristicas: [],
+    ordenacao: 0
   };
 
   @ViewChild('papeisDeParedeContainer') papeisDeParedeContainer!: ElementRef;
@@ -64,9 +65,11 @@ export class PapeisDeParedeComponent implements OnInit {
     }
   }
 
-  changeSorting(event: any) {
-    const selectedOption: string = event;
+  changeSorting(option: number) {
+    this.filtro.ordenacao = option;
+    this.carregarProdutos();
   }
+  
 
   scrollContainerToTop() {
     const containerElement = this.papeisDeParedeContainer.nativeElement;

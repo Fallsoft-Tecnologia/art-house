@@ -12,9 +12,11 @@ export class CabecalhoComponent {
   @Input() itemCount: number = 0;
   @Output() filterToggle = new EventEmitter<void>();
   @Output() openModal = new EventEmitter<void>();
-  @Output() sortingChanged = new EventEmitter<string>();
+  @Output() sortingChanged = new EventEmitter<number>();
+  
 
   filterOpened: boolean = true;
+  selectedItem: number = 0;
 
   constructor(private ngbCollapse: NgbCollapse, private modalService: FiltroModalService) {
     this.updateFilterOpened(window.innerWidth);
@@ -40,7 +42,8 @@ export class CabecalhoComponent {
     }
   }
 
-  changeSorting(option: string) {
+  changeSorting(option: number) {
+    this.selectedItem = option; 
     this.sortingChanged.emit(option);
   }
 }
