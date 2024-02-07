@@ -2,10 +2,11 @@
   <h2 class="text-center mt-5">Principais Lançamentos</h2>
 
   <div class="row row-cols-xl-5 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4 mt-3">
-    <app-card-papel-de-parede tamanho="grande" imagePath="/assets/papeisDeParede/5E050408.jpg"></app-card-papel-de-parede>
-    <app-card-papel-de-parede tamanho="grande" imagePath="/assets/papeisDeParede/5E050501.jpg"></app-card-papel-de-parede>
-    <app-card-papel-de-parede tamanho="grande" imagePath="/assets/papeisDeParede/5E050502.jpg"></app-card-papel-de-parede>
-    <app-card-papel-de-parede tamanho="grande" imagePath="/assets/papeisDeParede/5E050504.jpg"></app-card-papel-de-parede>
-    <app-card-papel-de-parede tamanho="grande" imagePath="/assets/papeisDeParede/5E050505.jpg"></app-card-papel-de-parede>
+    <div *ngFor="let imageData of imageDataList">
+      <ng-container *ngIf="imageData.statusProduto === 'Lançamentos'">
+        <app-card-papel-de-parede [grupo]="imageData.statusProduto"
+            [imagePath]="getImageUrl(imageData.contProduto)"></app-card-papel-de-parede>
+    </ng-container>
+  </div>
   </div>
 </section>    
