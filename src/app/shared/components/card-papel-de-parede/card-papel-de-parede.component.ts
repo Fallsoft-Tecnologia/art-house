@@ -9,10 +9,14 @@ import { ModalService } from 'src/app/core/services/modal.service';
 export class CardPapelDeParedeComponent {
   @Input() imagePath: string = '';
   @Input() grupo: string = '';
+  @Input() nomeProduto: string = '';
+  @Input() descProduto: string = '';
+
+
 
   constructor(private modalService: ModalService) {}
 
   openPapelIndividualModal() {
-    this.modalService.openModalWithImage(this.imagePath);
+    this.modalService.openModalWithImage(this.imagePath,this.nomeProduto,this.descProduto);
   }
 }

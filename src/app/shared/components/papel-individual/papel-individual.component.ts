@@ -12,6 +12,8 @@ declare var $: any;
 })
 export class PapelIndividualComponent implements AfterViewInit, OnChanges {
   @Input() imagePath: string = '';
+  @Input() nomeProduto:string = '';
+  @Input() descProduto:string = '';
   numeroDeRolos: string = '';
 
   formulario: FormGroup = new FormGroup({
@@ -22,7 +24,7 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
   constructor(private modalService: ModalService, private roloService: RoloService) { }
 
   ngAfterViewInit() {
-    this.modalService.openModalWithImage$.subscribe((imagePath) => {
+    this.modalService.openModalWithImage$.subscribe(({imagePath}) => {
       if (imagePath === this.imagePath) {
         this.openModal();
         this.updateModalSize();
@@ -40,7 +42,16 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
   openModal() {
     $('#papelIndividual .modal-body img').attr('src', '');
     $('#papelIndividual .modal-body img').attr('src', this.imagePath);
+
+    $('#papelIndividual .modal-body .nomeProduto h2').text('');
+    $('#papelIndividual .modal-body .descProduto p').text('');
+  
+    $('#papelIndividual .modal-body .nomeProduto h2').text(this.nomeProduto);
+    $('#papelIndividual .modal-body .descProduto p').text(this.descProduto);
     $('#papelIndividual').modal('show');
+
+
+
   }
 
   closeModal() {
@@ -79,6 +90,7 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
     } else {
       modalBody.addClass('mx-5 mb-5');
     }
+    
   }
 
   private updateRowGap() {

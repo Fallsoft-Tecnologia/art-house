@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ModalService {
-  private openModalWithImageSource = new Subject<string>();
+private openModalWithImageSource = new Subject<{ imagePath: string, nomeProduto:string, descProduto:string }>();
   openModalWithImage$ = this.openModalWithImageSource.asObservable();
 
   private openModalSource = new Subject<void>();
@@ -14,8 +14,8 @@ export class ModalService {
   private closeModalSource = new Subject<void>();
   closeModal$ = this.closeModalSource.asObservable();
 
-  openModalWithImage(imagePath: string) {
-    this.openModalWithImageSource.next(imagePath);
+  openModalWithImage(imagePath: string,nomeProduto:string, descProduto:string) {
+    this.openModalWithImageSource.next({ imagePath, nomeProduto,descProduto });
   }
 
   openModal() {
