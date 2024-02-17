@@ -11,11 +11,15 @@ declare var $: any;
   styleUrls: ['./papel-individual.component.css']
 })
 export class PapelIndividualComponent implements AfterViewInit, OnChanges {
-  @Input() imagePath: string = '';
-  @Input() nomeProduto:string = '';
-  @Input() descProduto:string = '';
-  numeroDeRolos: string = '';
+  @Input() idProduto: number = 0;
 
+  numeroDeRolos: string = '';
+  imagePath: string = '';
+  nomeProduto:string = '';
+  descProduto:string = '';
+  
+
+  
   formulario: FormGroup = new FormGroup({
     largura: new FormControl('', [Validators.required]),
     altura: new FormControl('', [Validators.required])
@@ -24,9 +28,10 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
   constructor(private modalService: ModalService, private roloService: RoloService) { }
 
   ngAfterViewInit() {
-    this.modalService.openModalWithImage$.subscribe(({imagePath}) => {
-      if (imagePath === this.imagePath) {
-        this.openModal();
+    this.modalService.openModalWithImage$.subscribe((idProduto) => {
+      console.log(idProduto);
+      if (idProduto === this.idProduto) {
+        this.openModal(idProduto)
         this.updateModalSize();
         this.updateRowGap();
       }
@@ -39,19 +44,9 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  openModal() {
-    $('#papelIndividual .modal-body img').attr('src', '');
-    $('#papelIndividual .modal-body img').attr('src', this.imagePath);
-
-    $('#papelIndividual .modal-body .nomeProduto h2').text('');
-    $('#papelIndividual .modal-body .descProduto p').text('');
-  
-    $('#papelIndividual .modal-body .nomeProduto h2').text(this.nomeProduto);
-    $('#papelIndividual .modal-body .descProduto p').text(this.descProduto);
-    $('#papelIndividual').modal('show');
-
-
-
+  openModal(idProduto:number) {
+      this.getProdutoPorId(idProduto); 
+      $('#papelIndividual').modal('show');
   }
 
   closeModal() {
@@ -103,4 +98,23 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
       rowDiv.removeClass('d-grid gap-4');
     }
   }
+
+  getProdutoPorId(idProduto: number): void {
+    this.modalService.getProdutoPorId(idProduto)
+    .subscribe((response: any) => {
+      this.imagePath = this.getImage(response.contProduto);
+      this.nomeProduto = response.nomeProduto;
+      this.descProduto = response.descProduto;
+      console.log(this.nomeProduto + ' e ' + this.descProduto)
+
+
+    })
+  }
+
+  getImage(image: Uint8Array):string{
+    const pathImage = "data:image/png;base64,";
+    return pathImage + image;
+  }
+
+
 }

@@ -1,4 +1,4 @@
-<article class="col h-100"  (click)="openPapelIndividualModal()">
+<article class="col h-100"  (click)="openPapelIndividualModal(idProduto)">
     <div class="card border-0 h-100">
         <img [src]="imagePath" class="card-img h-100" alt="...">
         <div class="card-img-overlay">
@@ -11,4 +11,4 @@
     </div>
 </article>
 
-<app-papel-individual [imagePath]="imagePath" [nomeProduto]="nomeProduto" [descProduto]="descProduto"></app-papel-individual>
+<app-papel-individual [idProduto]="idProduto"></app-papel-individual>

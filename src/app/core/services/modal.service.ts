@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
-private openModalWithImageSource = new Subject<{ imagePath: string, nomeProduto:string, descProduto:string }>();
+
+private baseUrl = 'http://localhost:8080/api/produto';
+private openModalWithImageSource = new Subject<number>();
   openModalWithImage$ = this.openModalWithImageSource.asObservable();
 
   private openModalSource = new Subject<void>();
@@ -14,8 +18,10 @@ private openModalWithImageSource = new Subject<{ imagePath: string, nomeProduto:
   private closeModalSource = new Subject<void>();
   closeModal$ = this.closeModalSource.asObservable();
 
-  openModalWithImage(imagePath: string,nomeProduto:string, descProduto:string) {
-    this.openModalWithImageSource.next({ imagePath, nomeProduto,descProduto });
+  constructor(private http: HttpClient) { }
+
+  openModalWithImage(idProduto:number) {
+    this.openModalWithImageSource.next(idProduto);
   }
 
   openModal() {
@@ -26,5 +32,9 @@ private openModalWithImageSource = new Subject<{ imagePath: string, nomeProduto:
 
   closeModal() {
     this.closeModalSource.next();
+  }
+
+  getProdutoPorId(idProduto:number){
+    return this.http.get(`${this.baseUrl}?idProduto=${idProduto}`);
   }
 }
