@@ -1,40 +1,33 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
+import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
+  private apiUrl = 'http://localhost:8080/api/produto';
 
-private baseUrl = 'http://localhost:8080/api/produto';
-private openModalWithImageSource = new Subject<number>();
+  private openModalWithImageSource = new Subject<{ idProduto: string }>();
   openModalWithImage$ = this.openModalWithImageSource.asObservable();
 
   private openModalSource = new Subject<void>();
   openModal$ = this.openModalSource.asObservable();
 
-  private closeModalSource = new Subject<void>();
-  closeModal$ = this.closeModalSource.asObservable();
+  
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  getProdutoInfo(idProduto: string): Observable<any> {
+    const url = `${this.apiUrl}?idProduto=${idProduto}`;
+    return this.http.get(url);
+  }
 
-  openModalWithImage(idProduto:number) {
-    this.openModalWithImageSource.next(idProduto);
+  openModalWithImage(idProduto: string) {
+    this.openModalWithImageSource.next({ idProduto });
   }
 
   openModal() {
     this.openModalSource.next();
-    console.log("Abriu 2")
     console.log(this.openModal$)
-  }
-
-  closeModal() {
-    this.closeModalSource.next();
-  }
-
-  getProdutoPorId(idProduto:number){
-    return this.http.get(`${this.baseUrl}?idProduto=${idProduto}`);
   }
 }

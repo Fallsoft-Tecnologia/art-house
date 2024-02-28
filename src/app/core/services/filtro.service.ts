@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
 import { WallpaperResponse } from 'src/app/shared/models/wallpaperResponse';
@@ -51,7 +51,6 @@ export class FiltroService {
   }
   
   getPageSize(): number {
-    // Retorne o tamanho da página desejado
-    return 20; // Substitua pelo valor correto
+    return 20;
   }
 }

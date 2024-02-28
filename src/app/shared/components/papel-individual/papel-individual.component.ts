@@ -11,12 +11,11 @@ declare var $: any;
   styleUrls: ['./papel-individual.component.css']
 })
 export class PapelIndividualComponent implements AfterViewInit, OnChanges {
-  @Input() idProduto: number = 0;
-
+  @Input() imagePath: string = '';
+  @Input() nomeProduto: string = '';
+  @Input() descProduto: string = '';
+  @Input() idProduto: string = '';
   numeroDeRolos: string = '';
-  imagePath: string = '';
-  nomeProduto:string = '';
-  descProduto:string = '';
   
 
   
@@ -28,10 +27,9 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
   constructor(private modalService: ModalService, private roloService: RoloService) { }
 
   ngAfterViewInit() {
-    this.modalService.openModalWithImage$.subscribe((idProduto) => {
-      console.log(idProduto);
+    this.modalService.openModalWithImage$.subscribe(({idProduto}) => {
       if (idProduto === this.idProduto) {
-        this.openModal(idProduto)
+        this.openModal();
         this.updateModalSize();
         this.updateRowGap();
       }
@@ -44,9 +42,10 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  openModal(idProduto:number) {
-      this.getProdutoPorId(idProduto); 
-      $('#papelIndividual').modal('show');
+  openModal() {
+    $('#papelIndividual .modal-body img').attr('src', '');
+    $('#papelIndividual .modal-body img').attr('src', this.imagePath);
+    $('#papelIndividual').modal('show');
   }
 
   closeModal() {
@@ -97,18 +96,6 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
     } else {
       rowDiv.removeClass('d-grid gap-4');
     }
-  }
-
-  getProdutoPorId(idProduto: number): void {
-    this.modalService.getProdutoPorId(idProduto)
-    .subscribe((response: any) => {
-      this.imagePath = this.getImage(response.contProduto);
-      this.nomeProduto = response.nomeProduto;
-      this.descProduto = response.descProduto;
-      console.log(this.nomeProduto + ' e ' + this.descProduto)
-
-
-    })
   }
 
   getImage(image: Uint8Array):string{

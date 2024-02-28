@@ -1,6 +1,7 @@
-<article class="col h-100"  (click)="openPapelIndividualModal(idProduto)">
+
+<article class="col h-100">
     <div class="card border-0 h-100">
-        <img [src]="imagePath" class="card-img h-100" alt="...">
+        <img [src]="imagePath" class="card-img h-100" [alt]="nomeProduto">
         <div class="card-img-overlay">
             <div *ngIf="grupo !== 'Normal' && grupo !== null" class="custom-badge d-flex mt-auto position-absolute bottom-0 end-0">
                 <div class="badge-content">
@@ -11,4 +12,4 @@
     </div>
 </article>
 
-<app-papel-individual [idProduto]="idProduto"></app-papel-individual>
+<app-papel-individual [imagePath]="imagePath" [idProduto]="idProduto" [descProduto]="descProduto" [nomeProduto]="nomeProduto"></app-papel-individual>
