@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { RoloService } from 'src/app/core/services/rolo.service';
@@ -26,6 +26,7 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
 
   constructor(private modalService: ModalService, private roloService: RoloService) { }
 
+
   ngAfterViewInit() {
     this.modalService.openModalWithImage$.subscribe(({idProduto}) => {
       if (idProduto === this.idProduto) {
@@ -50,6 +51,7 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
 
   closeModal() {
     $('#papelIndividual').modal('hide');
+    this.numeroDeRolos = '';
   }
 
   submitForm() {
@@ -103,5 +105,16 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
     return pathImage + image;
   }
 
+  preventModalClick(event: Event) {
+    event.stopPropagation();
+  }
+  
 
+  clearForm() {
+    this.formulario.reset();
+    this.numeroDeRolos = '';
+
+  }
+  
+  
 }

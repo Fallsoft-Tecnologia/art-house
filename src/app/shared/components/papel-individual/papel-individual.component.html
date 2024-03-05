@@ -1,5 +1,5 @@
-<div class="modal fade" id="papelIndividual" tabindex="-1" role="dialog" aria-labelledby="papelIndividualLabel"
-    aria-hidden="true">
+<div class="modal fade" id="papelIndividual" tabindex="-1" role="dialog" aria-labelledby="papelIndividualLabel" aria-hidden="true" (click)="preventModalClick($event)" (shown.bs.modal)="clearForm()">
+
     <div class="modal-dialog modal-fullscreen-md-down modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header border-0" data-bs-theme="dark">

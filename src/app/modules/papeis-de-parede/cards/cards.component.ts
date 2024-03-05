@@ -26,7 +26,8 @@ export class CardsComponent implements OnInit, OnDestroy {
 
   openPapelIndividualModal(idProduto: string) {
     this.modalService.openModalWithImage(idProduto);
-    this.loadProdutoInfo(idProduto);
+    this.loadProdutoInfo(idProduto)
+    
   }
 
   

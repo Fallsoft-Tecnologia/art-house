@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FiltroService } from 'src/app/core/services/filtro.service';
+import { ModalService } from 'src/app/core/services/modal.service';
 
 
 @Component({
@@ -12,6 +13,9 @@ export class LancamentosComponent {
   totalPages: number = 0;
   imageDataList: any[] = [];
   totalItems: number = 0;
+  nomeProduto: string = '';
+  descProduto: string = '';
+
 
 
   filtro = {
@@ -20,7 +24,7 @@ export class LancamentosComponent {
     ordenacao: 0
   };
 
-  constructor(private filtroService: FiltroService) {
+  constructor(private filtroService: FiltroService,private modalService: ModalService) {
     
   }
 
@@ -40,5 +44,24 @@ carregarProdutos(): void {
   getImageUrl(byteArray: Uint8Array): string {
     const pathImage = "data:image/png;base64,";
     return pathImage + byteArray;
+  }
+
+  openPapelIndividualModal(idProduto: string) {
+    this.modalService.openModalWithImage(idProduto);
+    this.loadProdutoInfo(idProduto)
+    
+  }
+
+  
+  private loadProdutoInfo(idProduto: string) {
+    this.modalService.getProdutoInfo(idProduto).subscribe({
+      next: (response: any) => {
+        this.nomeProduto = response.nomeProduto;
+        this.descProduto = response.descProduto;
+      },
+      error: (error) => {
+        console.error('Erro ao obter informações do produto:', error);
+      }
+    });
   }
 }
