@@ -47,6 +47,7 @@ export class PapeisDeParedeComponent implements OnInit {
 
   onFiltroChanged(novoFiltro: WallpaperFilter): void {
     this.filtro = novoFiltro;
+    this.currentPage = 1;
     this.carregarProdutos();
   }
 
