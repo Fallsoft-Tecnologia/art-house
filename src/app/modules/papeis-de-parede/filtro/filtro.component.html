@@ -17,7 +17,7 @@
                                 [checked]="filtro.cores?.includes(cor.nomeCor)" (change)="toggleFiltro(cor.nomeCor, 'cores')">
                                 <label class="form-check-label mt-1 ps-2" for="{{ cor.nomeCor }}">{{ cor.nomeCor }}</label>
                             </div>
-                            <img class="ms-auto align-self-center" src="/assets/filtro/amarelo.jpeg"
+                            <img class="ms-auto align-self-center" [src]= "getImageUrl(cor.imgCor)"
                                 alt="{{ cor.nomeCor }}" style="border-radius: 4px;">
                         </button>
                     </div>
@@ -40,7 +40,7 @@
                                 [checked]="filtro.caracteristicas?.includes(tipo.nomeCaracterisiticas)" (change)="toggleFiltro(tipo.nomeCaracterisiticas, 'caracteristicas')">
                                 <label class="form-check-label mt-1 ps-2" for="{{ tipo.nomeCaracterisiticas }}">{{ tipo.nomeCaracterisiticas }}</label>
                             </div>
-                            <img class="ms-auto align-self-center" src="/assets/papeisDeParede/3d.webp"
+                            <img class="ms-auto align-self-center" [src]= "getImageUrl(tipo.imgCaracteristicas)"
                                 alt="{{ tipo.nomeCaracterisiticas }}" style="border-radius: 4px;">
                         </button>
                     </div>

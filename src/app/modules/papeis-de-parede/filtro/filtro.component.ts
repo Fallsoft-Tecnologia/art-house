@@ -10,8 +10,8 @@ import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
   styleUrls: ['./filtro.component.css']
 })
 export class FiltroComponent implements OnInit {
-  cores: { idCor: number, nomeCor: string, imgCor: string }[] = [];
-  tipos: { idCaracteristicas: number, nomeCaracterisiticas: string, imgCaracteristicas: string }[] = [];
+  cores: { idCor: number, nomeCor: string, imgCor: Uint8Array }[] = [];
+  tipos: { idCaracteristicas: number, nomeCaracterisiticas: string, imgCaracteristicas: Uint8Array }[] = [];
   
   @Input() filtro: WallpaperFilter = {
     cores: [],
@@ -32,11 +32,11 @@ export class FiltroComponent implements OnInit {
 
   carregarCoresETipos() {
     this.filtroService.listarCores().subscribe(data => {
-      this.cores = data as { idCor: number, nomeCor: string, imgCor: string }[];
+      this.cores = data as { idCor: number, nomeCor: string, imgCor: Uint8Array }[];
     });
   
     this.filtroService.listarCaracteristicas().subscribe(data => {
-      this.tipos = data as { idCaracteristicas: number, nomeCaracterisiticas: string, imgCaracteristicas: string }[];
+      this.tipos = data as { idCaracteristicas: number, nomeCaracterisiticas: string, imgCaracteristicas: Uint8Array }[];
     });
   }
 
