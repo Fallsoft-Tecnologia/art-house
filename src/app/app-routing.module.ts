@@ -5,6 +5,7 @@ import { PapeisDeParedeComponent } from './modules/papeis-de-parede/papeis-de-pa
 import { PersonalizadosComponent } from './modules/personalizados/personalizados.component';
 import { SobreComponent } from './modules/sobre/sobre.component';
 import { ContatoComponent } from './modules/contato/contato.component';
+import { CadastroPapelDeParedeComponent } from './cadastro-papel-de-parede/cadastro-papel-de-parede.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
   },
   {
     path:'contato', component: ContatoComponent
+  },
+  {
+    path:'cadastro', component: CadastroPapelDeParedeComponent
   },
   { 
     path: '**', component: HomeComponent 

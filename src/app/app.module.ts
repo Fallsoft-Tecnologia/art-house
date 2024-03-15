@@ -18,6 +18,7 @@ import { NgbCollapse, NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-boot
 import { PersonalizadosModule } from './modules/personalizados/personalizados.module';
 import { SobreModule } from './modules/sobre/sobre.module';
 import { ContatoModule } from './modules/contato/contato.module';
+import { CadastroPapelDeParedeModule } from './cadastro-papel-de-parede/cadastro-papel-de-parede.module';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -41,6 +42,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     PersonalizadosModule,
     SobreModule,
     ContatoModule,
+    CadastroPapelDeParedeModule,
     NgbCollapseModule,
     NgbModule,
   ],
