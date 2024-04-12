@@ -2,209 +2,40 @@
 <div class="container my-4">
     <form [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-            <label for="tipoProduto" class="form-label">Tipo de Produto:</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Selecione o tipo de produto</option>
-                <option value="Papel de Parede">Papel de Parede</option>
-                <option value="Adesivo">Adesivo</option>
+            <label for="tipoProduto" class="form-label">Tipo do Produto:</label>
+            <select class="form-select" id="tipoProduto" aria-label="Selecione o tipo do produto" formControlName="tipoProduto">
+                <option disabled selected>Selecione o tipo do produto</option>
+                <option *ngFor="let tipoProduto of tipos" [value]="tipoProduto.nomeTipoProduto">{{ tipoProduto.nomeTipoProduto }}</option>
             </select>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3" >
             <label class="form-label">Características do Produto:</label>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="3D" id="3D">
-                <label class="form-check-label" for="3D">
-                    3D
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Abstrato" id="Abstrato">
-                <label class="form-check-label" for="Abstrato">
-                    Abstrato
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Arabesco" id="Arabesco">
-                <label class="form-check-label" for="Arabesco">
-                    Arabesco
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Caligrafia" id="Caligrafia">
-                <label class="form-check-label" for="Caligrafia">
-                    Caligrafia
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Chevron" id="Chevron">
-                <label class="form-check-label" for="Chevron">
-                    Chevron
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Cidade" id="Cidade">
-                <label class="form-check-label" for="Cidade">
-                    Cidade
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Cimento queimado" id="Cimento queimado">
-                <label class="form-check-label" for="Cimento queimado">
-                    Cimento queimado
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Cortiça" id="Cortiça">
-                <label class="form-check-label" for="Cortiça">
-                    Cortiça
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Floral e flores" id="Floral e flores">
-                <label class="form-check-label" for="Floral e flores">
-                    Floral e flores
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Geométrico" id="Geométrico">
-                <label class="form-check-label" for="Geométrico">
-                    Geométrico
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Listras" id="Listras">
-                <label class="form-check-label" for="Listras">
-                    Listras
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Madeira" id="Madeira">
-                <label class="form-check-label" for="Madeira">
-                    Madeira
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Mineral" id="Mineral">
-                <label class="form-check-label" for="Mineral">
-                    Mineral (Mica)
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Natureza" id="Natureza">
-                <label class="form-check-label" for="Natureza">
-                    Natureza
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Pedras" id="Pedras">
-                <label class="form-check-label" for="Pedras">
-                    Pedras
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Texturas" id="Texturas">
-                <label class="form-check-label" for="Texturas">
-                    Texturas
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Tijolinhos" id="Tijolinhos">
-                <label class="form-check-label" for="Tijolinhos">
-                    Tijolinhos
-                </label>
+            <div class="form-check" *ngFor="let caracteristica of caracteristicas">
+                <input class="form-check-input" type="checkbox" id = caracteristicasProduto formControlName=caracteristicasProduto [value]="caracteristica.nomeCaracterisiticas">
+                <label class="form-check-label" [for]="caracteristica.nomeCaracterisiticas">{{ caracteristica.nomeCaracterisiticas }}</label>
             </div>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Cores do Produto:</label>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Amarelo" id="Amarelo">
-                <label class="form-check-label" for="Amarelo">
-                    Amarelo
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Azul" id="Azul">
-                <label class="form-check-label" for="Azul">
-                    Azul
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Champagne" id="Champagne">
-                <label class="form-check-label" for="Champagne">
-                    Champagne
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Cinza" id="Cinza">
-                <label class="form-check-label" for="Cinza">
-                    Cinza
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Dourado" id="Dourado">
-                <label class="form-check-label" for="Dourado">
-                    Dourado
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Laranja" id="Laranja">
-                <label class="form-check-label" for="Laranja">
-                    Laranja
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Marrom" id="Marrom">
-                <label class="form-check-label" for="Marrom">
-                    Marrom
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Preto e Branco" id="Preto e Branco">
-                <label class="form-check-label" for="Preto e Branco">
-                    Preto e Branco
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Prata" id="Prata">
-                <label class="form-check-label" for="Prata">
-                    Prata
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Rosa e lilás" id="Rosa e lilás">
-                <label class="form-check-label" for="Rosa e lilás">
-                    Rosa e lilás
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Verde" id="Verde">
-                <label class="form-check-label" for="Verde">
-                    Verde
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Vermelho" id="Vermelho">
-                <label class="form-check-label" for="Vermelho">
-                    Vermelho
-                </label>
+            <div class="form-check" *ngFor="let cor of cores">
+                <input class="form-check-input" type="checkbox" id=coresProduto formControlName= coresProduto [value]="cor.nomeCor">
+                <label class="form-check-label"  [for]="cor.nomeCor">{{ cor.nomeCor }}</label>
             </div>
         </div>
 
         <div class="mb-3">
             <label for="statusProduto" class="form-label">Status do Produto:</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Selecione o status do produto</option>
-                <option value="Lançamento">Lançamento</option>
-                <option value="Mais vendidos">Mais vendidos</option>
-                <option value="Normal">Normal</option>
+            <select class="form-select" aria-label="Selecione o status do produto" formControlName="statusProduto">
+                <option disabled selected>Selecione o status do produto</option>
+                <option *ngFor="let statusProduto of status" [value]="statusProduto.nomeStatusProduto">{{ statusProduto.nomeStatusProduto }}</option>
             </select>
         </div>
 
         <div class="mb-3">
             <label for="descricao" class="form-label">Descrição:</label>
-            <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
+            <textarea class="form-control" id="descricao" name="descricao" rows="3" formControlName="descricao"></textarea>
         </div>
 
         <div class="mb-4">

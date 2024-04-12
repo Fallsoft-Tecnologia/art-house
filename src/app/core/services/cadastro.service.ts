@@ -7,11 +7,28 @@ import { Produto } from 'src/app/shared/models/produto';
   providedIn: 'root'
 })
 export class CadastroService {
-  private apiUrl = 'http://localhost:8080/api/produto/filtro';
+  private apiUrl = 'http://localhost:8080/api/produto';
 
   constructor(private http: HttpClient) { }
 
   cadastrarProduto(produto: Produto): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/cadastrar-produto`, produto);
+    return this.http.post<any>(`${this.apiUrl}/filtro/cadastrar-produto`, produto);
+  }
+
+  listarCaracteristicas() {
+    return this.http.get(`${this.apiUrl}/filtro/caracteristicas`);
+  }
+
+  listarCores() {
+    return this.http.get(`${this.apiUrl}/filtro/cores`);
+  }
+  listarStatusProduto() {
+    return this.http.get(`${this.apiUrl}/cadastro/status`);
+  }
+
+  listarTipoProduto() {
+    return this.http.get(`${this.apiUrl}/cadastro/tipos`);
   }
 }
+
+
