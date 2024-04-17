@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificacaoService, TipoNotificacao } from '../shared/components/notificacao/notificacao.service';
 import { Produto } from '../shared/models/produto';
 import { CadastroService } from '../core/services/cadastro.service';
@@ -19,6 +19,7 @@ export class CadastroPapelDeParedeComponent implements OnInit{
   status : {idStatusProduto: number, nomeStatusProduto: string}[] = [];
   tipos: {idTipoProduto: number, nomeTipoProduto: string}[] = [];
   
+  arquivoSelecionado: File | null = null; // Variável para armazenar o arquivo selecionado
 
   constructor(
     private fb: FormBuilder,
@@ -31,8 +32,8 @@ export class CadastroPapelDeParedeComponent implements OnInit{
   private initForm(): void {
     this.produtoForm = this.fb.group({
       tipoProduto: ['', Validators.required],
-      caracteristicasProduto: ['', Validators.required],
-      coresProduto: ['', Validators.required],
+      caracteristicasProduto: this.fb.array([]),
+      coresProduto: this.fb.array([]), // inicialize como um FormArray vazio
       statusProduto: ['', Validators.required],
       descricao: ['', Validators.required]
     });
@@ -43,28 +44,43 @@ export class CadastroPapelDeParedeComponent implements OnInit{
   }
   onSubmit(): void {
     this.formEnviado = true;
-    const tipoProduto = this.produtoForm.get('tipoProduto')?.value;
-    
-      const caracteristicasProduto = this.produtoForm.get('caracteristicasProduto')?.value;
-      const coresProduto = this.produtoForm.get('coresProduto')?.value;
+      const tipoProduto = this.produtoForm.get('tipoProduto')?.value;
+      const bolleanCaracteristicasProduto = this.produtoForm.get('caracteristicasProduto')?.value;
+      const bolleanCoresProduto = this.produtoForm.get('coresProduto')?.value;
       const statusProduto = this.produtoForm.get('statusProduto')?.value;
       const descricao = this.produtoForm.get('descricao')?.value;
 
-      console.log(tipoProduto);
-      console.log(coresProduto)
+      const coresProduto = this.encontrarNomesParametros(bolleanCoresProduto, this.cores.map(cor => cor.nomeCor));
+      const caracteristicasProduto = this.encontrarNomesParametros(bolleanCaracteristicasProduto, this.caracteristicas.map(caracteristica => caracteristica.nomeCaracterisiticas));
 
-    if (this.produtoForm.valid) {
-      
-      
-     
-        
-    
+      if (this.produtoForm.valid && this.arquivoSelecionado) { // Verifica se um arquivo foi selecionado
+        // Criar um objeto Produto com os valores do formulário
+        const produto: Produto = {
+          tipoProduto,
+          caracteristicasProduto,
+          coresProduto,
+          statusProduto,
+          descricao
+        };
+  
+        // Enviar o produto e o arquivo anexo para o serviço
+        this.cadastroService.cadastrarProduto(produto, this.arquivoSelecionado).subscribe(
+          () => {
+            this.handleSuccess("Produto cadastrado com sucesso"); // Tratar sucesso
+          },
+          (error) => {
+            this.handleError(error); // Tratar erro
+          }
+        );
       }
     }
   
+    onFileSelected(event: any): void {
+      this.arquivoSelecionado = event.target.files[0]; // Captura o arquivo selecionado
+    }
 
   private handleSuccess(response: any): void {
-    this.notificacaoService.mostrarNotificacao('Mensagem enviada com sucesso.', TipoNotificacao.Sucesso);
+    this.notificacaoService.mostrarNotificacao(response, TipoNotificacao.Sucesso);
     this.produtoForm.reset();
     this.formEnviado = false;
   }
@@ -76,12 +92,29 @@ export class CadastroPapelDeParedeComponent implements OnInit{
 
   carregarCoresEcaracteristicas() {
     this.cadastroService.listarCores().subscribe(data => {
-      this.cores = data as { idCor: number, nomeCor: string, imgCor: Uint8Array }[];
-    });
-  
-    this.cadastroService.listarCaracteristicas().subscribe(data => {
-      this.caracteristicas = data as { idCaracteristicas: number, nomeCaracterisiticas: string, imgCaracteristicas: Uint8Array }[];
-    });
+      if (Array.isArray(data)) {
+          const coresFormArray = this.produtoForm.get('coresProduto') as FormArray;
+          data.forEach(cor => {
+              coresFormArray.push(this.fb.control(false)); 
+          });
+          this.cores = data as { idCor: number, nomeCor: string, imgCor: Uint8Array }[];
+      } else {
+          console.error('Erro ao carregar cores: os dados recebidos não são um array.');
+      }
+  });
+
+  this.cadastroService.listarCaracteristicas().subscribe(data => {
+    if (Array.isArray(data)) {
+        const caracteristicasFormArray = this.produtoForm.get('caracteristicasProduto') as FormArray;
+        data.forEach(caracteristicas => {
+          caracteristicasFormArray.push(this.fb.control(false)); 
+        });
+        this.caracteristicas = data as { idCaracteristicas: number, nomeCaracterisiticas: string, imgCaracteristicas: Uint8Array }[];
+      } else {
+        console.error('Erro ao carregar caracteristicas : os dados recebidos não são um array.');
+    }
+});
+
 
     this.cadastroService.listarStatusProduto().subscribe(data =>{
       this.status = data as {idStatusProduto: number, nomeStatusProduto: string}[];
@@ -90,5 +123,15 @@ export class CadastroPapelDeParedeComponent implements OnInit{
     this.cadastroService.listarTipoProduto().subscribe(data =>{
       this.tipos = data as {idTipoProduto: number, nomeTipoProduto: string}[];
     })
-  }
+  };
+
+   encontrarNomesParametros(valores: boolean[], nomes: string[]): string[] {
+    const nomesParametros: string[] = [];
+    for (let i = 0; i < valores.length; i++) {
+        if (valores[i]) {
+            nomesParametros.push(nomes[i]);
+        }
+    }
+    return nomesParametros;
+}
 }

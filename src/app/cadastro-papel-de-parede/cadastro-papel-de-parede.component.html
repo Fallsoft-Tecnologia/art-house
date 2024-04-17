@@ -4,31 +4,33 @@
         <div class="mb-3">
             <label for="tipoProduto" class="form-label">Tipo do Produto:</label>
             <select class="form-select" id="tipoProduto" aria-label="Selecione o tipo do produto" formControlName="tipoProduto">
-                <option disabled selected>Selecione o tipo do produto</option>
+                <option value="" selected disabled>Selecione o tipo do produto</option>
                 <option *ngFor="let tipoProduto of tipos" [value]="tipoProduto.nomeTipoProduto">{{ tipoProduto.nomeTipoProduto }}</option>
             </select>
         </div>
+        
 
-        <div class="mb-3" >
-            <label class="form-label">Características do Produto:</label>
-            <div class="form-check" *ngFor="let caracteristica of caracteristicas">
-                <input class="form-check-input" type="checkbox" id = caracteristicasProduto formControlName=caracteristicasProduto [value]="caracteristica.nomeCaracterisiticas">
+        <div class="mb-3" formArrayName="caracteristicasProduto">
+            <label class="form-label">Cores do Produto:</label>
+            <div class="form-check" *ngFor="let caracteristica of caracteristicas;let i = index">
+                <input class="form-check-input" type="checkbox" [id]="caracteristica.nomeCaracterisiticas" [formControlName]="i" [value]="caracteristica.nomeCaracterisiticas">
                 <label class="form-check-label" [for]="caracteristica.nomeCaracterisiticas">{{ caracteristica.nomeCaracterisiticas }}</label>
             </div>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3" formArrayName="coresProduto">
             <label class="form-label">Cores do Produto:</label>
-            <div class="form-check" *ngFor="let cor of cores">
-                <input class="form-check-input" type="checkbox" id=coresProduto formControlName= coresProduto [value]="cor.nomeCor">
-                <label class="form-check-label"  [for]="cor.nomeCor">{{ cor.nomeCor }}</label>
+            <div class="form-check" *ngFor="let cor of cores; let i = index">
+                <input class="form-check-input" type="checkbox" [id]="cor.nomeCor" [formControlName]="i" [value]="cor.nomeCor">
+                <label class="form-check-label" [for]="cor.nomeCor">{{ cor.nomeCor }}</label>
             </div>
         </div>
+        
 
         <div class="mb-3">
             <label for="statusProduto" class="form-label">Status do Produto:</label>
             <select class="form-select" aria-label="Selecione o status do produto" formControlName="statusProduto">
-                <option disabled selected>Selecione o status do produto</option>
+                <option  value="" disabled selected>Selecione o status do produto</option>
                 <option *ngFor="let statusProduto of status" [value]="statusProduto.nomeStatusProduto">{{ statusProduto.nomeStatusProduto }}</option>
             </select>
         </div>
@@ -40,8 +42,9 @@
 
         <div class="mb-4">
             <label class="form-label" for="customFile">Imagem papel de parede</label>
-            <input type="file" class="form-control" id="customFile" />
+            <input type="file" class="form-control" id="customFile" (change)="onFileSelected($event)" />
         </div>
+        
 
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Cadastrar Produto</button>

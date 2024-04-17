@@ -11,9 +11,15 @@ export class CadastroService {
 
   constructor(private http: HttpClient) { }
 
-  cadastrarProduto(produto: Produto): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/filtro/cadastrar-produto`, produto);
+  cadastrarProduto(produto: Produto, anexo: File): Observable<any> {
+    const formData = new FormData();
+
+    formData.append('parametros', JSON.stringify(produto));
+    formData.append('anexo', anexo);
+
+   return this.http.post<any>(`${this.apiUrl}/cadastro/image/parametros`, formData);
   }
+
 
   listarCaracteristicas() {
     return this.http.get(`${this.apiUrl}/filtro/caracteristicas`);
