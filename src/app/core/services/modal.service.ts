@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
-  private apiUrl = 'http://localhost:8080/api/produto';
+  private apiUrl = environment.apiUrl.concat('/produto');
 
   private openModalWithImageSource = new Subject<{ idProduto: string }>();
   openModalWithImage$ = this.openModalWithImageSource.asObservable();
