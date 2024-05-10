@@ -23,5 +23,6 @@ body {
     margin: 0;
     font-family: 'Raleway', 'Montserrat', sans-serif;
     background-color: var(--Branco);
+    font-variant-numeric: lining-nums proportional-nums;
 }
     
