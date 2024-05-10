@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
 import { WallpaperResponse } from 'src/app/shared/models/wallpaperResponse';
-
+import { environment } from 'src/config';
 @Injectable({
   providedIn: 'root'
 })
 export class FiltroService {
-  private baseUrl = 'http://localhost:8080/api/produto/filtro';
+  private baseUrl = environment.apiUrl.concat('/produto/filtro');
 
   private filtroSubject = new BehaviorSubject<WallpaperFilter>({ cores: [], caracteristicas: [] });
   filtroChange = this.filtroSubject.asObservable();

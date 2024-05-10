@@ -2,12 +2,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, retry, throwError } from 'rxjs';
 import { LeadDescontoForm } from 'src/app/shared/models/leadDescontoForm';
+import { environment } from 'src/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeadService {
-  private api = 'http://localhost:8080/api/leads';
+  private api = environment.apiUrl.concat('/leads');
 
   constructor(private http: HttpClient) { }
 

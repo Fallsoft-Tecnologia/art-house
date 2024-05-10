@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Produto } from 'src/app/shared/models/produto';
+import { environment } from 'src/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CadastroService {
-  private apiUrl = 'http://localhost:8080/api/produto';
+  private apiUrl = environment.apiUrl.concat('/produto');
 
   constructor(private http: HttpClient) { }
 
