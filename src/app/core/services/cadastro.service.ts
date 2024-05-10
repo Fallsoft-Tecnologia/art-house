@@ -23,11 +23,11 @@ export class CadastroService {
 
 
   listarCaracteristicas() {
-    return this.http.get(`${this.apiUrl}/filtro/caracteristicas`);
+    return this.http.get(`${this.apiUrl}/cadastro/caracteristicas`);
   }
 
   listarCores() {
-    return this.http.get(`${this.apiUrl}/filtro/cores`);
+    return this.http.get(`${this.apiUrl}/cadastro/cores`);
   }
   listarStatusProduto() {
     return this.http.get(`${this.apiUrl}/cadastro/status`);

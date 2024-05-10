@@ -14,8 +14,8 @@ export class CadastroPapelDeParedeComponent implements OnInit{
   produtoForm: FormGroup = new FormGroup({});
   formEnviado = false;
 
-  cores: { idCor: number, nomeCor: string, imgCor: Uint8Array }[] = [];
-  caracteristicas: { idCaracteristicas: number, nomeCaracterisiticas: string, imgCaracteristicas: Uint8Array }[] = [];
+  cores: { idCor: number, nomeCor: string }[] = [];
+  caracteristicas: { idCaracteristicas: number, nomeCaracterisiticas: string}[] = [];
   status : {idStatusProduto: number, nomeStatusProduto: string}[] = [];
   tipos: {idTipoProduto: number, nomeTipoProduto: string}[] = [];
   
@@ -97,7 +97,7 @@ export class CadastroPapelDeParedeComponent implements OnInit{
           data.forEach(cor => {
               coresFormArray.push(this.fb.control(false)); 
           });
-          this.cores = data as { idCor: number, nomeCor: string, imgCor: Uint8Array }[];
+          this.cores = data as { idCor: number, nomeCor: string }[];
       } else {
           console.error('Erro ao carregar cores: os dados recebidos não são um array.');
       }
@@ -109,7 +109,7 @@ export class CadastroPapelDeParedeComponent implements OnInit{
         data.forEach(caracteristicas => {
           caracteristicasFormArray.push(this.fb.control(false)); 
         });
-        this.caracteristicas = data as { idCaracteristicas: number, nomeCaracterisiticas: string, imgCaracteristicas: Uint8Array }[];
+        this.caracteristicas = data as { idCaracteristicas: number, nomeCaracterisiticas: string }[];
       } else {
         console.error('Erro ao carregar caracteristicas : os dados recebidos não são um array.');
     }
