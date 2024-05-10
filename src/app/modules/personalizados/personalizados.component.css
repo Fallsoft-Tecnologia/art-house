@@ -1,15 +1,21 @@
-.container-custom {
-    max-width: 1200px;
+.container {
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-p, li {
+
+.fa-badge-check {
+    color: var(--Botao-verde);
+}
+
+ul li {
+    list-style-type: none;
+}
+
+p,
+li {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .highlight {
