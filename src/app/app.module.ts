@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,10 @@ import { PersonalizadosModule } from './modules/personalizados/personalizados.mo
 import { SobreModule } from './modules/sobre/sobre.module';
 import { ContatoModule } from './modules/contato/contato.module';
 import { CadastroPapelDeParedeModule } from './cadastro-papel-de-parede/cadastro-papel-de-parede.module';
+import { LoadingInterceptor } from './loading/loading-inteceptor.compont';
+import { LoadingService } from './core/services/loading.service';
+import { LoadingModalModule } from './loading-modal/loading-modal.module';
+
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -45,8 +49,12 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     CadastroPapelDeParedeModule,
     NgbCollapseModule,
     NgbModule,
+    LoadingModalModule
   ],
-  providers: [NgbCollapse],
+  providers: [NgbCollapse,
+    LoadingService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

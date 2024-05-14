@@ -1,3 +1,7 @@
+
+<div *ngIf="isLoading" class="loading-overlay">
+    <app-loading-modal/>
+  </div>
 <app-titulo-pagina [titulo]="'Cadastrar papeis de parede'"></app-titulo-pagina>
 <div class="container my-4">
     <form [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
@@ -11,7 +15,7 @@
         
 
         <div class="mb-3" formArrayName="caracteristicasProduto">
-            <label class="form-label">Cores do Produto:</label>
+            <label class="form-label">Caracteristicas do Produto:</label>
             <div class="form-check" *ngFor="let caracteristica of caracteristicas;let i = index">
                 <input class="form-check-input" type="checkbox" [id]="caracteristica.nomeCaracterisiticas" [formControlName]="i" [value]="caracteristica.nomeCaracterisiticas">
                 <label class="form-check-label" [for]="caracteristica.nomeCaracterisiticas">{{ caracteristica.nomeCaracterisiticas }}</label>

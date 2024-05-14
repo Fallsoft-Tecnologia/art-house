@@ -1,3 +1,7 @@
+<div *ngIf="isLoading" class="loading-overlay">
+    <app-loading-modal/>
+  </div>
+
 <span #papeisDeParedeContainer></span>
 <app-titulo-pagina [titulo]="'Papeis de parede'"></app-titulo-pagina>
 <app-cabecalho [itemCount]="totalItems" (filterToggle)="toggleFilter()" (sortingChanged)="changeSorting($event)"></app-cabecalho>
@@ -12,3 +16,7 @@
 </div>
 
 <app-filtro-modal></app-filtro-modal>
+
+<!-- Seu template HTML onde você deseja exibir o indicador de loading -->
+
+  

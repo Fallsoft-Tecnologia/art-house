@@ -20,6 +20,9 @@ export class PapeisDeParedeComponent implements OnInit {
     ordenacao: 0
   };
 
+  isLoading: boolean = true;
+
+
   @ViewChild('papeisDeParedeContainer') papeisDeParedeContainer!: ElementRef;
 
   constructor(private filtroService: FiltroService) {
@@ -33,9 +36,11 @@ export class PapeisDeParedeComponent implements OnInit {
   carregarProdutos(): void {
     this.filtroService.listrarProdutosFiltrados(this.filtro, this.currentPage - 1, this.pageSize)
     .subscribe((response: any) => {
+      this.isLoading = true
       this.imageDataList = response.content;
       this.totalPages = response.totalPages;
       this.totalItems = response.totalElements;
+      this.isLoading = false
     })
   }
 
