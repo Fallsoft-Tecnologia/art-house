@@ -12,6 +12,7 @@ export class CardPapelDeParedeComponent {
   @Input() descProduto: string = '';
   @Input() nomeProduto: string = '';
   @Input() idProduto: string = '';
+  @Input() aspectRatio: 'square' | 'rectangular' = 'square';
 
   constructor() {}
 }
