@@ -1,7 +1,7 @@
 <section class="container mb-5">
     <div class="row row-cols-xl-4 row-cols-md-3 row-cols-2 g-4 mt-2 d-flex justify-content-center d-grid gap-auto">
         <div *ngFor="let imageData of imageDataList">
-            <app-card-papel-de-parede (click)="openPapelIndividualModal(imageData.idProduto)" [grupo]="imageData.statusProduto"
+            <app-card-papel-de-parede (click)="openPapelIndividualModal(imageData.idProduto)" [grupo]="imageData.statusProduto" aspectRatio="square"
                 [imagePath]="getImageUrl(imageData.contProduto)" [idProduto]="imageData.idProduto" [nomeProduto]="nomeProduto" [descProduto]="descProduto"></app-card-papel-de-parede>
         </div>
     </div>

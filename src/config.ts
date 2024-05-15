@@ -2,7 +2,7 @@ var dev = 'dev';
 var hml = 'hml';
 var prd = 'prd';
 
-var local = dev;
+var local = hml;
 
 let apiUrl: string = '';
 
