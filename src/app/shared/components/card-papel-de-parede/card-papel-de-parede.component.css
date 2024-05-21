@@ -5,6 +5,14 @@ article {
     border-radius: 5px;
 }
 
+.aspect-ratio-square {
+    aspect-ratio: 1/1;
+}
+
+.aspect-ratio-rectangular {
+    height: 350px;
+}
+
 .custom-badge {
     background-color: var(--Azul-medio-claro);
     border-radius: 5px;

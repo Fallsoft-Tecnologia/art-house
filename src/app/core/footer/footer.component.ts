@@ -9,6 +9,7 @@ import { LeadDescontoForm } from 'src/app/shared/models/leadDescontoForm';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
+  anoAtual = new Date().getFullYear();
   leadDescontoForm: FormGroup = new FormGroup({});
   cadastroSucesso = false;
 
