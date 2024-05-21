@@ -47,6 +47,7 @@ export class CadastroPapelDeParedeComponent implements OnInit{
 
   }
   onSubmit(): void {
+    this.isLoading = true;
     this.formEnviado = true;
       const tipoProduto = this.produtoForm.get('tipoProduto')?.value;
       const bolleanCaracteristicasProduto = this.produtoForm.get('caracteristicasProduto')?.value;
@@ -70,15 +71,22 @@ export class CadastroPapelDeParedeComponent implements OnInit{
         // Enviar o produto e o arquivo anexo para o serviço
         this.cadastroService.cadastrarProduto(produto, this.arquivoSelecionado).subscribe(
           () => {
+            this.isLoading = false
+            this.resetForm();
+            this.arquivoSelecionado = null;
             this.handleSuccess("Produto cadastrado com sucesso"); // Tratar sucesso
-
+           
           },
           (error) => {
+            this.isLoading = false
             this.handleError(error); // Tratar erro
-   
+            // Limpar o formulário e o arquivo
+
           }
           
         );
+      }else{
+        this.isLoading = false;
       }
 
     }
@@ -90,6 +98,7 @@ export class CadastroPapelDeParedeComponent implements OnInit{
   private handleSuccess(response: any): void {
     this.notificacaoService.mostrarNotificacao(response, TipoNotificacao.Sucesso);
     this.produtoForm.reset();
+    this.resetForm()
     this.formEnviado = false;
   }
 
@@ -147,4 +156,15 @@ export class CadastroPapelDeParedeComponent implements OnInit{
     }
     return nomesParametros;
 }
+
+private resetForm(): void {
+  this.arquivoSelecionado = null;
+  this.formEnviado = false;
+  // Limpar o campo de arquivo
+  const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+  if (fileInput) {
+    fileInput.value = '';
+  }
+}
+
 }

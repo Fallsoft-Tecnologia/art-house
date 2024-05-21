@@ -24,6 +24,9 @@ export class LancamentosComponent {
     ordenacao: 0
   };
 
+
+  isLoading:boolean = true;
+
   constructor(private filtroService: FiltroService,private modalService: ModalService) {
     
   }
@@ -33,11 +36,13 @@ export class LancamentosComponent {
   }
 
 carregarProdutos(): void {
+  this.isLoading = true;
     this.filtroService.listrarProdutosFiltrados(this.filtro, 0, this.pageSize)
     .subscribe((response: any) => {
       this.imageDataList = response.content;
       this.totalPages = response.totalPages;
       this.totalItems = response.totalElements;
+      this.isLoading = false;
     })
   }
 

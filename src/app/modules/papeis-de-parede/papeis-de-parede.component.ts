@@ -12,7 +12,7 @@ export class PapeisDeParedeComponent implements OnInit {
   totalItems: number = 0;
   showFilter: boolean = true;
   currentPage: number = 1;
-  pageSize: number = 28;
+  pageSize: number = 24;
   totalPages: number = 0;
   filtro: WallpaperFilter = {
     cores: [],
@@ -34,9 +34,10 @@ export class PapeisDeParedeComponent implements OnInit {
   }
 
   carregarProdutos(): void {
+    this.isLoading = true
+
     this.filtroService.listrarProdutosFiltrados(this.filtro, this.currentPage - 1, this.pageSize)
     .subscribe((response: any) => {
-      this.isLoading = true
       this.imageDataList = response.content;
       this.totalPages = response.totalPages;
       this.totalItems = response.totalElements;
