@@ -12,7 +12,7 @@ export class PapeisDeParedeComponent implements OnInit {
   totalItems: number = 0;
   showFilter: boolean = true;
   currentPage: number = 1;
-  pageSize: number = 12;
+  pageSize: number = 20;
   totalPages: number = 0;
   filtro: WallpaperFilter = {
     cores: [],
