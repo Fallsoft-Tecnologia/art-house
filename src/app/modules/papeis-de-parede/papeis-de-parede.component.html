@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<app-filtro-modal></app-filtro-modal>
+<app-filtro-modal [filtro]="filtro" (filtroChanged)="onFiltroChanged($event)"></app-filtro-modal>
 
 <!-- Seu template HTML onde você deseja exibir o indicador de loading -->
 

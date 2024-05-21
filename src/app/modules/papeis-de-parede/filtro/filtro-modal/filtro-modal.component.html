@@ -1,4 +1,5 @@
-<div class="modal fade modal-esquerda" id="filtroModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-esquerda" id="filtroModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header border-0">
@@ -8,68 +9,31 @@
             <div class="modal-body">
                 <div class="pb-3">
                     <h5 class="filtro-titulo">Cor</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-action list-group-item-light d-flex align-items-center">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                            <label class="form-check-label" for="flexCheckDefault1">
-                                Amarelo
-                            </label>
-                            <img src="/assets/filtro/amarelo.jpeg" alt="amarelo" class="imagem-check ms-auto">
-                        </li>
-                        <li class="list-group-item list-group-item-action list-group-item-light d-flex align-items-center">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                            <label class="form-check-label" for="flexCheckDefault1">
-                                Amarelo
-                            </label>
-                            <img src="/assets/filtro/amarelo.jpeg" alt="amarelo" class="imagem-check ms-auto">
-                        </li>
-                        <li class="list-group-item list-group-item-action list-group-item-light d-flex align-items-center">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                            <label class="form-check-label" for="flexCheckDefault1">
-                                Amarelo
-                            </label>
-                            <img src="/assets/filtro/amarelo.jpeg" alt="amarelo" class="imagem-check ms-auto">
-                        </li>
-                        <li class="list-group-item list-group-item-action list-group-item-light d-flex align-items-center">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                            <label class="form-check-label" for="flexCheckDefault1">
-                                Amarelo
-                            </label>
-                            <img src="/assets/filtro/amarelo.jpeg" alt="amarelo" class="imagem-check ms-auto">
+                    <ul *ngFor="let cor of cores" class="list-group list-group-flush">
+                        <li
+                            class="list-group-item list-group-item-action list-group-item-light d-flex align-items-center">
+                            <input class="form-check-input" type="checkbox" id="{{ cor.nomeCor }}"
+                                [checked]="filtro.cores?.includes(cor.nomeCor)"
+                                (change)="toggleFiltro(cor.nomeCor, 'cores')">
+                            <label class="form-check-label mt-1 ps-2" for="{{ cor.nomeCor }}">{{ cor.nomeCor }}</label>
+                            <img class="imagem-check ms-auto" [src]="getImageUrl(cor.imgCor)" alt="{{ cor.nomeCor }}"
+                                style="border-radius: 4px;">
                         </li>
                     </ul>
                     <hr>
                 </div>
                 <div class="pb-3">
                     <h5 class="filtro-titulo">Tipo</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-action list-group-item-light d-flex align-items-center">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                            <label class="form-check-label" for="flexCheckDefault1">
-                                Amarelo
-                            </label>
-                            <img src="/assets/filtro/amarelo.jpeg" alt="amarelo" class="imagem-check ms-auto">
-                        </li>
-                        <li class="list-group-item list-group-item-action list-group-item-light d-flex align-items-center">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                            <label class="form-check-label" for="flexCheckDefault1">
-                                Amarelo
-                            </label>
-                            <img src="/assets/filtro/amarelo.jpeg" alt="amarelo" class="imagem-check ms-auto">
-                        </li>
-                        <li class="list-group-item list-group-item-action list-group-item-light d-flex align-items-center">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                            <label class="form-check-label" for="flexCheckDefault1">
-                                Amarelo
-                            </label>
-                            <img src="/assets/filtro/amarelo.jpeg" alt="amarelo" class="imagem-check ms-auto">
-                        </li>
-                        <li class="list-group-item list-group-item-action list-group-item-light d-flex align-items-center">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                            <label class="form-check-label" for="flexCheckDefault1">
-                                Amarelo
-                            </label>
-                            <img src="/assets/filtro/amarelo.jpeg" alt="amarelo" class="imagem-check ms-auto">
+                    <ul *ngFor="let tipo of tipos" class="list-group list-group-flush">
+                        <li
+                            class="list-group-item list-group-item-action list-group-item-light d-flex align-items-center">
+                            <input class="form-check-input" type="checkbox" id="{{ tipo.nomeCaracterisiticas }}"
+                                [checked]="filtro.caracteristicas?.includes(tipo.nomeCaracterisiticas)"
+                                (change)="toggleFiltro(tipo.nomeCaracterisiticas, 'caracteristicas')">
+                            <label class="form-check-label mt-1 ps-2" for="{{ tipo.nomeCaracterisiticas }}">{{
+                                tipo.nomeCaracterisiticas }}</label>
+                            <img class="imagem-check ms-auto" [src]="getImageUrl(tipo.imgCaracteristicas)"
+                                alt="{{ tipo.nomeCaracterisiticas }}" style="border-radius: 4px;">
                         </li>
                     </ul>
                     <hr>

@@ -56,6 +56,11 @@ export class PapeisDeParedeComponent implements OnInit {
     this.currentPage = 1;
     this.carregarProdutos();
   }
+  onFiltroChangedModal(novoFiltro: WallpaperFilter): void {
+    this.filtro = novoFiltro;
+    this.currentPage = 1;
+    this.carregarProdutos();
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
@@ -74,6 +79,7 @@ export class PapeisDeParedeComponent implements OnInit {
 
   changeSorting(option: number) {
     this.filtro.ordenacao = option;
+    this.currentPage = 1;
     this.carregarProdutos();
   }
   
@@ -82,4 +88,6 @@ export class PapeisDeParedeComponent implements OnInit {
     const containerElement = this.papeisDeParedeContainer.nativeElement;
     containerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
+  
 }
