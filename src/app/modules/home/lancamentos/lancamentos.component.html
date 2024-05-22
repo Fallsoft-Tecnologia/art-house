@@ -5,7 +5,7 @@
 <section class="container mb-5">
   <h2 class="text-center mt-5">Principais Lançamentos</h2>
 
-  <div class="row row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4 mt-3">
+  <div class="row row-cols-xl-4 row-cols-2 g-4 mt-3">
     <div *ngFor="let imageData of imageDataList">
       <ng-container *ngIf="imageData.statusProduto === 'Lançamentos'">
         <app-card-papel-de-parede (click)="openPapelIndividualModal(imageData.idProduto)"
