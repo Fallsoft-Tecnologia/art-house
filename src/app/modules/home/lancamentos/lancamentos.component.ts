@@ -9,7 +9,7 @@ import { ModalService } from 'src/app/core/services/modal.service';
   styleUrls: ['./lancamentos.component.css']
 })
 export class LancamentosComponent {
-  pageSize: number = 5;
+  pageSize: number = 4;
   totalPages: number = 0;
   imageDataList: any[] = [];
   totalItems: number = 0;
