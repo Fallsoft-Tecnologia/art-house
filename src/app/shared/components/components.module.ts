@@ -9,6 +9,8 @@ import { PapelIndividualComponent } from './papel-individual/papel-individual.co
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { TituloPaginaComponent } from './titulo-pagina/titulo-pagina.component';
 import { BannerComponent } from './banner/banner.component';
+import { LoadingModalComponent } from 'src/app/loading-modal/loading-modal.component';
+import { LoadingSpinnerComponent } from 'src/app/loading/loading-spinner.component';
 
 
 
@@ -20,7 +22,9 @@ import { BannerComponent } from './banner/banner.component';
     NotificacaoComponent,
     PapelIndividualComponent,
     TituloPaginaComponent,
-    BannerComponent
+    BannerComponent,
+    LoadingModalComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,10 @@ import { BannerComponent } from './banner/banner.component';
     NotificacaoComponent,
     PapelIndividualComponent,
     TituloPaginaComponent,
-    BannerComponent
+    BannerComponent,
+    LoadingModalComponent,
+    LoadingSpinnerComponent
+    
   ],
   providers: [provideNgxMask()]
 })

@@ -13,6 +13,8 @@ export class CadastroPapelDeParedeComponent implements OnInit{
 
   produtoForm: FormGroup = new FormGroup({});
   formEnviado = false;
+  isLoading: boolean = false;
+
 
   cores: { idCor: number, nomeCor: string }[] = [];
   caracteristicas: { idCaracteristicas: number, nomeCaracterisiticas: string}[] = [];
@@ -41,8 +43,11 @@ export class CadastroPapelDeParedeComponent implements OnInit{
 
   ngOnInit(): void {
     this.carregarCoresEcaracteristicas();
+
+
   }
   onSubmit(): void {
+    this.isLoading = true;
     this.formEnviado = true;
       const tipoProduto = this.produtoForm.get('tipoProduto')?.value;
       const bolleanCaracteristicasProduto = this.produtoForm.get('caracteristicasProduto')?.value;
@@ -66,13 +71,24 @@ export class CadastroPapelDeParedeComponent implements OnInit{
         // Enviar o produto e o arquivo anexo para o serviço
         this.cadastroService.cadastrarProduto(produto, this.arquivoSelecionado).subscribe(
           () => {
+            this.isLoading = false
+            this.resetForm();
+            this.arquivoSelecionado = null;
             this.handleSuccess("Produto cadastrado com sucesso"); // Tratar sucesso
+           
           },
           (error) => {
+            this.isLoading = false
             this.handleError(error); // Tratar erro
+            // Limpar o formulário e o arquivo
+
           }
+          
         );
+      }else{
+        this.isLoading = false;
       }
+
     }
   
     onFileSelected(event: any): void {
@@ -82,6 +98,7 @@ export class CadastroPapelDeParedeComponent implements OnInit{
   private handleSuccess(response: any): void {
     this.notificacaoService.mostrarNotificacao(response, TipoNotificacao.Sucesso);
     this.produtoForm.reset();
+    this.resetForm()
     this.formEnviado = false;
   }
 
@@ -90,7 +107,9 @@ export class CadastroPapelDeParedeComponent implements OnInit{
     console.error('Erro ao enviar mensagem:', error);
   }
 
-  carregarCoresEcaracteristicas() {
+  carregarCoresEcaracteristicas(): void {
+    this.isLoading = true; // Define isLoading como true para mostrar o indicador de loading
+
     this.cadastroService.listarCores().subscribe(data => {
       if (Array.isArray(data)) {
           const coresFormArray = this.produtoForm.get('coresProduto') as FormArray;
@@ -99,12 +118,13 @@ export class CadastroPapelDeParedeComponent implements OnInit{
           });
           this.cores = data as { idCor: number, nomeCor: string }[];
       } else {
-          console.error('Erro ao carregar cores: os dados recebidos não são um array.');
+        console.error('Erro ao carregar cores: os dados recebidos não são um array.');
       }
-  });
+      this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
+    });
 
-  this.cadastroService.listarCaracteristicas().subscribe(data => {
-    if (Array.isArray(data)) {
+    this.cadastroService.listarCaracteristicas().subscribe(data => {
+      if (Array.isArray(data)) {
         const caracteristicasFormArray = this.produtoForm.get('caracteristicasProduto') as FormArray;
         data.forEach(caracteristicas => {
           caracteristicasFormArray.push(this.fb.control(false)); 
@@ -112,18 +132,20 @@ export class CadastroPapelDeParedeComponent implements OnInit{
         this.caracteristicas = data as { idCaracteristicas: number, nomeCaracterisiticas: string }[];
       } else {
         console.error('Erro ao carregar caracteristicas : os dados recebidos não são um array.');
-    }
-});
+      }
+      this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
+    });
 
-
-    this.cadastroService.listarStatusProduto().subscribe(data =>{
+    this.cadastroService.listarStatusProduto().subscribe(data => {
       this.status = data as {idStatusProduto: number, nomeStatusProduto: string}[];
-    })
+      this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
+    });
 
-    this.cadastroService.listarTipoProduto().subscribe(data =>{
+    this.cadastroService.listarTipoProduto().subscribe(data => {
       this.tipos = data as {idTipoProduto: number, nomeTipoProduto: string}[];
-    })
-  };
+      this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
+    });
+  }
 
    encontrarNomesParametros(valores: boolean[], nomes: string[]): string[] {
     const nomesParametros: string[] = [];
@@ -134,4 +156,15 @@ export class CadastroPapelDeParedeComponent implements OnInit{
     }
     return nomesParametros;
 }
+
+private resetForm(): void {
+  this.arquivoSelecionado = null;
+  this.formEnviado = false;
+  // Limpar o campo de arquivo
+  const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+  if (fileInput) {
+    fileInput.value = '';
+  }
+}
+
 }

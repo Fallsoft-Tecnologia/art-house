@@ -21,6 +21,7 @@ export class LeadDescontoFormComponent implements OnInit {
     private notificacaoService: NotificacaoService
   ) { }
 
+  isLoading : boolean = false
   ngOnInit() {
     this.initForm();
   }
@@ -33,6 +34,7 @@ export class LeadDescontoFormComponent implements OnInit {
   }
 
   cadastrar() {
+    this.isLoading = true;
     this.submitted = true;
 
     if (this.leadDescontoForm.valid && this.atLeastOneRequired('email', 'celular')) {
@@ -70,6 +72,7 @@ export class LeadDescontoFormComponent implements OnInit {
     this.notificacaoService.mostrarNotificacao(this.successMessage, TipoNotificacao.Sucesso);
     this.leadDescontoForm.reset();
     this.submitted = false;
+    this.isLoading = false
   }
 
   private handleError(error: any) {

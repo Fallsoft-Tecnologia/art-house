@@ -14,6 +14,8 @@ export class ContatoFormComponent {
   mensagemForm: FormGroup = new FormGroup({});
   formEnviado = false;
 
+  isLoading:boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private mensagemService: MensagemService,
@@ -33,8 +35,9 @@ export class ContatoFormComponent {
   }
 
   onSubmit(): void {
+    this.isLoading = true;
     this.formEnviado = true;
-
+    
     if (this.mensagemForm.valid) {
       const leadMensagemForm = this.getLeadMensagemForm();
       this.enviarMensagem(leadMensagemForm);
@@ -77,10 +80,12 @@ export class ContatoFormComponent {
     this.notificacaoService.mostrarNotificacao('Mensagem enviada com sucesso.', TipoNotificacao.Sucesso);
     this.mensagemForm.reset();
     this.formEnviado = false;
+    this.isLoading = false;
   }
 
   private handleError(error: any): void {
     this.notificacaoService.mostrarNotificacao('Erro ao enviar mensagem. Por favor, tente novamente.', TipoNotificacao.Erro);
     console.error('Erro ao enviar mensagem:', error);
+    this.isLoading = false;
   }
 }

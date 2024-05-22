@@ -12,13 +12,16 @@ export class PapeisDeParedeComponent implements OnInit {
   totalItems: number = 0;
   showFilter: boolean = true;
   currentPage: number = 1;
-  pageSize: number = 12;
+  pageSize: number = 24;
   totalPages: number = 0;
   filtro: WallpaperFilter = {
     cores: [],
     caracteristicas: [],
     ordenacao: 0
   };
+
+  isLoading: boolean = true;
+
 
   @ViewChild('papeisDeParedeContainer') papeisDeParedeContainer!: ElementRef;
 
@@ -31,11 +34,14 @@ export class PapeisDeParedeComponent implements OnInit {
   }
 
   carregarProdutos(): void {
+    this.isLoading = true
+
     this.filtroService.listrarProdutosFiltrados(this.filtro, this.currentPage - 1, this.pageSize)
     .subscribe((response: any) => {
       this.imageDataList = response.content;
       this.totalPages = response.totalPages;
       this.totalItems = response.totalElements;
+      this.isLoading = false
     })
   }
 
@@ -46,6 +52,11 @@ export class PapeisDeParedeComponent implements OnInit {
   }
 
   onFiltroChanged(novoFiltro: WallpaperFilter): void {
+    this.filtro = novoFiltro;
+    this.currentPage = 1;
+    this.carregarProdutos();
+  }
+  onFiltroChangedModal(novoFiltro: WallpaperFilter): void {
     this.filtro = novoFiltro;
     this.currentPage = 1;
     this.carregarProdutos();
@@ -68,6 +79,7 @@ export class PapeisDeParedeComponent implements OnInit {
 
   changeSorting(option: number) {
     this.filtro.ordenacao = option;
+    this.currentPage = 1;
     this.carregarProdutos();
   }
   
@@ -76,4 +88,6 @@ export class PapeisDeParedeComponent implements OnInit {
     const containerElement = this.papeisDeParedeContainer.nativeElement;
     containerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
+  
 }
