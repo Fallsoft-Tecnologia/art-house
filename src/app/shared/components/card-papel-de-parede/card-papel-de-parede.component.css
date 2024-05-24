@@ -10,7 +10,7 @@ article {
 }
 
 .aspect-ratio-rectangular {
-    height: 350px;
+    aspect-ratio: 2/3;
 }
 
 .custom-badge {
@@ -27,4 +27,10 @@ article {
 
 .badge-content {
     background-color: var(--Azul-medio-claro);
+}
+
+@media (max-width: 575px) {
+    .aspect-ratio-rectangular {
+        aspect-ratio: 1/1;
+    }
 }
