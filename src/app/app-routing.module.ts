@@ -8,6 +8,7 @@ import { ContatoComponent } from './modules/contato/contato.component';
 import { CadastroPapelDeParedeComponent } from './cadastro-papel-de-parede/cadastro-papel-de-parede.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   {
     path:'home', component: HomeComponent
   },
