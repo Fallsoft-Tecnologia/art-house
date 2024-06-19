@@ -9,7 +9,7 @@ let apiUrl: string = '';
 if (local === dev) {
     apiUrl = 'http://localhost:8080/api';
 } else if(local === hml){
-    apiUrl = 'http://fallsoft.com.br:8080/api';
+    apiUrl = 'https://api.fallsoft.com.br/api';
 }else if(local === prd){
     apiUrl = 'http://localhost:8080/api';
 
