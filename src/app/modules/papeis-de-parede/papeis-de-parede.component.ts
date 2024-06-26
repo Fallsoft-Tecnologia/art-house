@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FiltroService } from 'src/app/core/services/filtro.service';
+import { NotificacaoService, TipoNotificacao } from 'src/app/shared/components/notificacao/notificacao.service';
 import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
 
 @Component({
@@ -25,7 +26,7 @@ export class PapeisDeParedeComponent implements OnInit {
 
   @ViewChild('papeisDeParedeContainer') papeisDeParedeContainer!: ElementRef;
 
-  constructor(private filtroService: FiltroService) {
+  constructor(private filtroService: FiltroService,private notificacaoService: NotificacaoService) {
     this.updateShowFilter(window.innerWidth);
   }
 
@@ -37,12 +38,16 @@ export class PapeisDeParedeComponent implements OnInit {
     this.isLoading = true
 
     this.filtroService.listrarProdutosFiltrados(this.filtro, this.currentPage - 1, this.pageSize)
-    .subscribe((response: any) => {
-      this.imageDataList = response.content;
-      this.totalPages = response.totalPages;
-      this.totalItems = response.totalElements;
-      this.isLoading = false
-    })
+    .subscribe({
+      next: (response: any) => {
+        this.imageDataList = response.content;
+        this.totalPages = response.totalPages;
+        this.totalItems = response.totalElements;
+        this.isLoading = false; 
+      },
+      error: (err) => {
+        this.handleError(err);      }
+    });
   }
 
   onPageChange(newPage: number): void {
@@ -81,6 +86,13 @@ export class PapeisDeParedeComponent implements OnInit {
     this.filtro.ordenacao = option;
     this.currentPage = 1;
     this.carregarProdutos();
+  }
+
+  private handleError(error: any): void {
+    this.notificacaoService.mostrarNotificacao('Erro ao listar as imagens. Por favor, tente novamente.', TipoNotificacao.Erro);
+    console.error('Erro ao enviar mensagem:', error);
+    this.isLoading = false;
+
   }
   
 

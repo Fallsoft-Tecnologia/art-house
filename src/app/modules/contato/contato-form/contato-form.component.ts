@@ -84,8 +84,9 @@ export class ContatoFormComponent {
   }
 
   private handleError(error: any): void {
+    this.isLoading = false;
     this.notificacaoService.mostrarNotificacao('Erro ao enviar mensagem. Por favor, tente novamente.', TipoNotificacao.Erro);
     console.error('Erro ao enviar mensagem:', error);
-    this.isLoading = false;
+    
   }
 }

@@ -76,7 +76,9 @@ export class LeadDescontoFormComponent implements OnInit {
   }
 
   private handleError(error: any) {
+    this.isLoading = false
     this.notificacaoService.mostrarNotificacao(this.errorMessage, TipoNotificacao.Erro);
     console.error('Erro ao cadastrar o lead:', error);
+    
   }
 }

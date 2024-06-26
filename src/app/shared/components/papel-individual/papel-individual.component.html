@@ -1,3 +1,7 @@
+<div *ngIf="isLoading" class="loading-overlay">
+    <app-loading-modal/>
+  </div>
+
 <div class="modal fade" id="papelIndividual" tabindex="-1" role="dialog" aria-labelledby="papelIndividualLabel" aria-hidden="true" (click)="preventModalClick($event)" (shown.bs.modal)="clearForm()">
 
     <div class="modal-dialog modal-fullscreen-md-down modal-dialog-centered" role="document">

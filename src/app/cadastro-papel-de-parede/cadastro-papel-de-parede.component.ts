@@ -79,7 +79,7 @@ export class CadastroPapelDeParedeComponent implements OnInit{
           },
           (error) => {
             this.isLoading = false
-            this.handleError(error); // Tratar erro
+            this.handleError(error,'Erro ao cadastrar a imagem. Por favor, tente novamente.'); // Tratar erro
             // Limpar o formulário e o arquivo
 
           }
@@ -102,50 +102,72 @@ export class CadastroPapelDeParedeComponent implements OnInit{
     this.formEnviado = false;
   }
 
-  private handleError(error: any): void {
-    this.notificacaoService.mostrarNotificacao('Erro ao enviar mensagem. Por favor, tente novamente.', TipoNotificacao.Erro);
+  private handleError(error: any, mensagem:any): void {
+    this.isLoading = false;
+    this.notificacaoService.mostrarNotificacao(mensagem, TipoNotificacao.Erro);
     console.error('Erro ao enviar mensagem:', error);
   }
 
   carregarCoresEcaracteristicas(): void {
     this.isLoading = true; // Define isLoading como true para mostrar o indicador de loading
-
-    this.cadastroService.listarCores().subscribe(data => {
-      if (Array.isArray(data)) {
+  
+    this.cadastroService.listarCores().subscribe({
+      next: (data) => {
+        if (Array.isArray(data)) {
           const coresFormArray = this.produtoForm.get('coresProduto') as FormArray;
           data.forEach(cor => {
-              coresFormArray.push(this.fb.control(false)); 
+            coresFormArray.push(this.fb.control(false));
           });
           this.cores = data as { idCor: number, nomeCor: string }[];
-      } else {
-        console.error('Erro ao carregar cores: os dados recebidos não são um array.');
+        } else {
+          console.error('Erro ao carregar cores: os dados recebidos não são um array.');
+        }
+        this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
+      },
+      error: (err) => {
+        this.handleError(err,'Erro ao carregar cores. Por favor, tente novamente.');
       }
-      this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
     });
-
-    this.cadastroService.listarCaracteristicas().subscribe(data => {
-      if (Array.isArray(data)) {
-        const caracteristicasFormArray = this.produtoForm.get('caracteristicasProduto') as FormArray;
-        data.forEach(caracteristicas => {
-          caracteristicasFormArray.push(this.fb.control(false)); 
-        });
-        this.caracteristicas = data as { idCaracteristicas: number, nomeCaracterisiticas: string }[];
-      } else {
-        console.error('Erro ao carregar caracteristicas : os dados recebidos não são um array.');
+  
+    this.cadastroService.listarCaracteristicas().subscribe({
+      next: (data) => {
+        if (Array.isArray(data)) {
+          const caracteristicasFormArray = this.produtoForm.get('caracteristicasProduto') as FormArray;
+          data.forEach(caracteristicas => {
+            caracteristicasFormArray.push(this.fb.control(false));
+          });
+          this.caracteristicas = data as { idCaracteristicas: number, nomeCaracterisiticas: string }[];
+        } else {
+          console.error('Erro ao carregar características: os dados recebidos não são um array.');
+        }
+        this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
+      },
+      error: (err) => {
+        this.handleError(err,'Erro ao carregar características. Por favor, tente novamente.');
       }
-      this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
     });
-
-    this.cadastroService.listarStatusProduto().subscribe(data => {
-      this.status = data as {idStatusProduto: number, nomeStatusProduto: string}[];
-      this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
+  
+    this.cadastroService.listarStatusProduto().subscribe({
+      next: (data) => {
+        this.status = data as { idStatusProduto: number, nomeStatusProduto: string }[];
+        this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
+      },
+      error: (err) => {
+        this.handleError(err,'Erro ao carregar status produto. Por favor, tente novamente.');
+      }
     });
-
-    this.cadastroService.listarTipoProduto().subscribe(data => {
-      this.tipos = data as {idTipoProduto: number, nomeTipoProduto: string}[];
-      this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
+  
+    this.cadastroService.listarTipoProduto().subscribe({
+      next: (data) => {
+        this.tipos = data as { idTipoProduto: number, nomeTipoProduto: string }[];
+        this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
+      },
+      error: (err) => {
+        this.handleError(err,'Erro ao carregar tipo produto. Por favor, tente novamente.');
+      }
     });
   }
+  
 
    encontrarNomesParametros(valores: boolean[], nomes: string[]): string[] {
     const nomesParametros: string[] = [];
