@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FiltroService } from 'src/app/core/services/filtro.service';
 import { ModalService } from 'src/app/core/services/modal.service';
+import { NotificacaoService, TipoNotificacao } from 'src/app/shared/components/notificacao/notificacao.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class LancamentosComponent {
 
   isLoading:boolean = true;
 
-  constructor(private filtroService: FiltroService,private modalService: ModalService) {
+  constructor(private filtroService: FiltroService,private modalService: ModalService,private notificacaoService: NotificacaoService) {
     
   }
 
@@ -38,12 +39,17 @@ export class LancamentosComponent {
 carregarProdutos(): void {
   this.isLoading = true;
     this.filtroService.listrarProdutosFiltrados(this.filtro, 0, this.pageSize)
-    .subscribe((response: any) => {
-      this.imageDataList = response.content;
-      this.totalPages = response.totalPages;
-      this.totalItems = response.totalElements;
-      this.isLoading = false;
-    })
+    .subscribe({
+      next: (response: any) => {
+        this.imageDataList = response.content;
+        this.totalPages = response.totalPages;
+        this.totalItems = response.totalElements;
+        this.isLoading = false; 
+      },
+      error: (err) => {
+        this.handleError(err);
+      }
+    });
   }
 
   getImageUrl(byteArray: Uint8Array): string {
@@ -55,6 +61,13 @@ carregarProdutos(): void {
     this.modalService.openModalWithImage(idProduto);
     this.loadProdutoInfo(idProduto)
     
+  }
+  private handleError(error: any): void {
+    this.isLoading = false;
+    this.notificacaoService.mostrarNotificacao('Erro ao listar as imagens. Por favor, tente novamente.', TipoNotificacao.Erro);
+    console.error('Erro ao enviar mensagem:', error);
+   
+
   }
 
   

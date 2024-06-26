@@ -16,6 +16,8 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
   @Input() descProduto: string = '';
   @Input() idProduto: string = '';
   numeroDeRolos: string = '';
+
+  isLoading : boolean = false
   
 
   
@@ -38,10 +40,17 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (changes['nomeProduto']) {
+      this.nomeProduto = this.removeFileExtension(this.nomeProduto);
+    }
     if (changes['numeroDeRolos']) {
       this.updateRowGap();
     }
   }
+
+  private removeFileExtension(fileName: string): string {
+    return fileName.split('.').slice(0, -1).join('.');
+  }
 
   openModal() {
     $('#papelIndividual .modal-body img').attr('src', '');
@@ -56,6 +65,7 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
 
   submitForm() {
     if (this.formulario.valid) {
+      this.isLoading = true;
       const { largura, altura } = this.formulario.value;
       this.roloService.calcularQuantidadeDeRolos(largura, altura).subscribe(
         (response: string) => {
@@ -72,6 +82,8 @@ export class PapelIndividualComponent implements AfterViewInit, OnChanges {
           } else {
             // Tratar outros erros conforme necessário
           }
+
+          this.isLoading = false;
         }
       );
     }
