@@ -9,18 +9,17 @@ import { CadastroService } from '../core/services/cadastro.service';
   templateUrl: './cadastro-papel-de-parede.component.html',
   styleUrls: ['./cadastro-papel-de-parede.component.css']
 })
-export class CadastroPapelDeParedeComponent implements OnInit{
+export class CadastroPapelDeParedeComponent implements OnInit {
 
   produtoForm: FormGroup = new FormGroup({});
   formEnviado = false;
   isLoading: boolean = false;
 
-
   cores: { idCor: number, nomeCor: string }[] = [];
-  caracteristicas: { idCaracteristicas: number, nomeCaracterisiticas: string}[] = [];
-  status : {idStatusProduto: number, nomeStatusProduto: string}[] = [];
-  tipos: {idTipoProduto: number, nomeTipoProduto: string}[] = [];
-  
+  caracteristicas: { idCaracteristicas: number, nomeCaracterisiticas: string }[] = [];
+  status: { idStatusProduto: number, nomeStatusProduto: string }[] = [];
+  tipos: { idTipoProduto: number, nomeTipoProduto: string }[] = [];
+
   arquivoSelecionado: File | null = null; // Variável para armazenar o arquivo selecionado
 
   constructor(
@@ -37,72 +36,67 @@ export class CadastroPapelDeParedeComponent implements OnInit{
       caracteristicasProduto: this.fb.array([]),
       coresProduto: this.fb.array([]), // inicialize como um FormArray vazio
       statusProduto: ['', Validators.required],
-      descricao: ['', Validators.required]
+      descricao: [''] // Descrição é opcional
     });
   }
 
   ngOnInit(): void {
     this.carregarCoresEcaracteristicas();
-
-
   }
+
   onSubmit(): void {
     this.isLoading = true;
     this.formEnviado = true;
-      const tipoProduto = this.produtoForm.get('tipoProduto')?.value;
-      const bolleanCaracteristicasProduto = this.produtoForm.get('caracteristicasProduto')?.value;
-      const bolleanCoresProduto = this.produtoForm.get('coresProduto')?.value;
-      const statusProduto = this.produtoForm.get('statusProduto')?.value;
-      const descricao = this.produtoForm.get('descricao')?.value;
 
-      const coresProduto = this.encontrarNomesParametros(bolleanCoresProduto, this.cores.map(cor => cor.nomeCor));
-      const caracteristicasProduto = this.encontrarNomesParametros(bolleanCaracteristicasProduto, this.caracteristicas.map(caracteristica => caracteristica.nomeCaracterisiticas));
+    const tipoProduto = this.produtoForm.get('tipoProduto')?.value;
+    const bolleanCaracteristicasProduto = this.produtoForm.get('caracteristicasProduto')?.value;
+    const bolleanCoresProduto = this.produtoForm.get('coresProduto')?.value;
+    const statusProduto = this.produtoForm.get('statusProduto')?.value;
+    const descricao = this.produtoForm.get('descricao')?.value;
 
-      if (this.produtoForm.valid && this.arquivoSelecionado) { // Verifica se um arquivo foi selecionado
-        // Criar um objeto Produto com os valores do formulário
-        const produto: Produto = {
-          tipoProduto,
-          caracteristicasProduto,
-          coresProduto,
-          statusProduto,
-          descricao
-        };
-  
-        // Enviar o produto e o arquivo anexo para o serviço
-        this.cadastroService.cadastrarProduto(produto, this.arquivoSelecionado).subscribe(
-          () => {
-            this.isLoading = false
-            this.resetForm();
-            this.arquivoSelecionado = null;
-            this.handleSuccess("Produto cadastrado com sucesso"); // Tratar sucesso
-           
-          },
-          (error) => {
-            this.isLoading = false
-            this.handleError(error,'Erro ao cadastrar a imagem. Por favor, tente novamente.'); // Tratar erro
-            // Limpar o formulário e o arquivo
+    const coresProduto = this.encontrarNomesParametros(bolleanCoresProduto, this.cores.map(cor => cor.nomeCor));
+    const caracteristicasProduto = this.encontrarNomesParametros(bolleanCaracteristicasProduto, this.caracteristicas.map(caracteristica => caracteristica.nomeCaracterisiticas));
 
-          }
-          
-        );
-      }else{
-        this.isLoading = false;
-      }
+    if (this.produtoForm.valid && this.arquivoSelecionado) { // Verifica se um arquivo foi selecionado
+      // Criar um objeto Produto com os valores do formulário
+      const produto: Produto = {
+        tipoProduto,
+        caracteristicasProduto,
+        coresProduto,
+        statusProduto,
+        descricao // A descrição pode estar vazia
+      };
 
+      // Usar o observer em vez de funções separadas
+      this.cadastroService.cadastrarProduto(produto, this.arquivoSelecionado).subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.resetForm();
+          this.arquivoSelecionado = null;
+          this.handleSuccess("Produto cadastrado com sucesso");
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.handleError(error, 'Erro ao cadastrar a imagem. Por favor, tente novamente.');
+        }
+      });
+    } else {
+      this.isLoading = false;
     }
-  
-    onFileSelected(event: any): void {
-      this.arquivoSelecionado = event.target.files[0]; // Captura o arquivo selecionado
-    }
+  }
+
+  onFileSelected(event: any): void {
+    this.arquivoSelecionado = event.target.files[0]; // Captura o arquivo selecionado
+  }
 
   private handleSuccess(response: any): void {
     this.notificacaoService.mostrarNotificacao(response, TipoNotificacao.Sucesso);
     this.produtoForm.reset();
-    this.resetForm()
+    this.resetForm();
     this.formEnviado = false;
   }
 
-  private handleError(error: any, mensagem:any): void {
+  private handleError(error: any, mensagem: any): void {
     this.isLoading = false;
     this.notificacaoService.mostrarNotificacao(mensagem, TipoNotificacao.Erro);
     console.error('Erro ao enviar mensagem:', error);
@@ -110,7 +104,7 @@ export class CadastroPapelDeParedeComponent implements OnInit{
 
   carregarCoresEcaracteristicas(): void {
     this.isLoading = true; // Define isLoading como true para mostrar o indicador de loading
-  
+
     this.cadastroService.listarCores().subscribe({
       next: (data) => {
         if (Array.isArray(data)) {
@@ -125,10 +119,10 @@ export class CadastroPapelDeParedeComponent implements OnInit{
         this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
       },
       error: (err) => {
-        this.handleError(err,'Erro ao carregar cores. Por favor, tente novamente.');
+        this.handleError(err, 'Erro ao carregar cores. Por favor, tente novamente.');
       }
     });
-  
+
     this.cadastroService.listarCaracteristicas().subscribe({
       next: (data) => {
         if (Array.isArray(data)) {
@@ -143,50 +137,48 @@ export class CadastroPapelDeParedeComponent implements OnInit{
         this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
       },
       error: (err) => {
-        this.handleError(err,'Erro ao carregar características. Por favor, tente novamente.');
+        this.handleError(err, 'Erro ao carregar características. Por favor, tente novamente.');
       }
     });
-  
+
     this.cadastroService.listarStatusProduto().subscribe({
       next: (data) => {
         this.status = data as { idStatusProduto: number, nomeStatusProduto: string }[];
         this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
       },
       error: (err) => {
-        this.handleError(err,'Erro ao carregar status produto. Por favor, tente novamente.');
+        this.handleError(err, 'Erro ao carregar status produto. Por favor, tente novamente.');
       }
     });
-  
+
     this.cadastroService.listarTipoProduto().subscribe({
       next: (data) => {
         this.tipos = data as { idTipoProduto: number, nomeTipoProduto: string }[];
         this.isLoading = false; // Define isLoading como false quando a solicitação HTTP é concluída
       },
       error: (err) => {
-        this.handleError(err,'Erro ao carregar tipo produto. Por favor, tente novamente.');
+        this.handleError(err, 'Erro ao carregar tipo produto. Por favor, tente novamente.');
       }
     });
   }
-  
 
-   encontrarNomesParametros(valores: boolean[], nomes: string[]): string[] {
+  encontrarNomesParametros(valores: boolean[], nomes: string[]): string[] {
     const nomesParametros: string[] = [];
     for (let i = 0; i < valores.length; i++) {
-        if (valores[i]) {
-            nomesParametros.push(nomes[i]);
-        }
+      if (valores[i]) {
+        nomesParametros.push(nomes[i]);
+      }
     }
     return nomesParametros;
-}
-
-private resetForm(): void {
-  this.arquivoSelecionado = null;
-  this.formEnviado = false;
-  // Limpar o campo de arquivo
-  const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-  if (fileInput) {
-    fileInput.value = '';
   }
-}
 
+  private resetForm(): void {
+    this.arquivoSelecionado = null;
+    this.formEnviado = false;
+    // Limpar o campo de arquivo
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  }
 }
