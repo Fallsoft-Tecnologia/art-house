@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
 import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
@@ -14,5 +14,25 @@ export class CardPapelDeParedeComponent {
   @Input() idProduto: string = '';
   @Input() aspectRatio: 'square' | 'rectangular' = 'square';
 
-  constructor() {}
+  imageSrc: string = '';
+
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  ngAfterViewInit(): void {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.loadImage();
+          observer.unobserve(this.el.nativeElement);
+        }
+      });
+    }, {
+      rootMargin: '0px',
+      threshold: 0.1
+    });
+    observer.observe(this.el.nativeElement);
+  }
+
+  private loadImage() {
+    this.imageSrc = this.imagePath;
+  }
 }
