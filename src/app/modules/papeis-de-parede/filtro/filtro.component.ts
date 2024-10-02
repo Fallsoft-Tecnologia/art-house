@@ -1,6 +1,4 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { take } from 'rxjs';
 import { FiltroService } from 'src/app/core/services/filtro.service';
 import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
 
@@ -12,7 +10,7 @@ import { WallpaperFilter } from 'src/app/shared/models/wallpaperFilter';
 export class FiltroComponent implements OnInit {
   cores: { idCor: number, nomeCor: string, imgCor: Uint8Array }[] = [];
   tipos: { idCaracteristicas: number, nomeCaracterisiticas: string, imgCaracteristicas: Uint8Array }[] = [];
-  
+
   @Input() filtro: WallpaperFilter = {
     cores: [],
     caracteristicas: [],
@@ -21,23 +19,37 @@ export class FiltroComponent implements OnInit {
   @Output() filtroChanged = new EventEmitter<WallpaperFilter>();
 
   filtroDivClass: string = 'container-filtro float-start w-100 d-none';
+  coresCarregadas = false;
+  tiposCarregados = false;
 
   constructor(private filtroService: FiltroService) {
     this.updateFiltroDivClass(window.innerWidth);
   }
 
   ngOnInit(): void {
-    this.carregarCoresETipos();
+    // Remova a chamada inicial para carregar os dados.
   }
 
-  carregarCoresETipos() {
+  carregarCores(): void {
     this.filtroService.listarCores().subscribe(data => {
       this.cores = data as { idCor: number, nomeCor: string, imgCor: Uint8Array }[];
+      this.coresCarregadas = true;
     });
-  
+  }
+
+  carregarTipos(): void {
     this.filtroService.listarCaracteristicas().subscribe(data => {
       this.tipos = data as { idCaracteristicas: number, nomeCaracterisiticas: string, imgCaracteristicas: Uint8Array }[];
+      this.tiposCarregados = true;
     });
+  }
+
+  onCollapseOpened(tipo: 'cores' | 'tipos'): void {
+    if (tipo === 'cores' && !this.coresCarregadas) {
+      this.carregarCores();
+    } else if (tipo === 'tipos' && !this.tiposCarregados) {
+      this.carregarTipos();
+    }
   }
 
   toggleFiltro(nome: string, tipo: 'cores' | 'caracteristicas'): void {
@@ -47,7 +59,7 @@ export class FiltroComponent implements OnInit {
       this.filtro[tipo]?.push(nome);
     }
 
-    console.log(this.filtro)
+    console.log(this.filtro);
     this.emitFiltroChange();
   }
 
