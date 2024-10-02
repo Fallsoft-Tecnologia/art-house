@@ -53,7 +53,7 @@ carregarProdutos(): void {
   }
 
   getImageUrl(byteArray: Uint8Array): string {
-    const pathImage = "data:image/png;base64,";
+    const pathImage = "data:image/webp;base64,";
     return pathImage + byteArray;
   }
 
