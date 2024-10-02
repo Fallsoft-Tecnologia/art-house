@@ -1,23 +1,27 @@
 <div [class]="filtroDivClass">
     <div class="collapse collapse-horizontal d-block" id="filtro">
         <div class="accordion accordion-flush container border-0 mt-3" data-bs-theme="dark" id="filtroAccordion">
+
             <!-- Cores -->
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#filtroCores" aria-expanded="true" aria-controls="filtroCores">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#filtroCores" aria-expanded="false" aria-controls="filtroCores"
+                        (click)="onCollapseOpened('cores')">
                         Cores
                     </button>
                 </h2>
-                <div id="filtroCores" class="accordion-collapse collapse show">
+                <div id="filtroCores" class="accordion-collapse collapse">
                     <div class="accordion-body d-grid gap-2 border-0">
                         <button *ngFor="let cor of cores" class="btn btn-dark d-flex border-0">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="{{ cor.nomeCor }}"
-                                [checked]="filtro.cores?.includes(cor.nomeCor)" (change)="toggleFiltro(cor.nomeCor, 'cores')">
-                                <label class="form-check-label mt-1 ps-2" for="{{ cor.nomeCor }}">{{ cor.nomeCor }}</label>
+                                    [checked]="filtro.cores?.includes(cor.nomeCor)"
+                                    (change)="toggleFiltro(cor.nomeCor, 'cores')">
+                                <label class="form-check-label mt-1 ps-2"
+                                    for="{{ cor.nomeCor }}">{{ cor.nomeCor }}</label>
                             </div>
-                            <img class="ms-auto align-self-center" [src]= "getImageUrl(cor.imgCor)"
+                            <img class="ms-auto align-self-center" [src]="getImageUrl(cor.imgCor)"
                                 alt="{{ cor.nomeCor }}" style="border-radius: 4px;">
                         </button>
                     </div>
@@ -27,25 +31,31 @@
             <!-- Tipos -->
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#filtroTipos" aria-expanded="true" aria-controls="filtroTipos">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#filtroTipos" aria-expanded="false" aria-controls="filtroTipos"
+                        (click)="onCollapseOpened('tipos')">
                         Tipos
                     </button>
                 </h2>
-                <div id="filtroTipos" class="accordion-collapse collapse show">
+                <div id="filtroTipos" class="accordion-collapse collapse">
                     <div class="accordion-body d-grid gap-2 border-0">
                         <button *ngFor="let tipo of tipos" class="btn btn-dark d-flex border-0">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="{{ tipo.nomeCaracterisiticas }}"
-                                [checked]="filtro.caracteristicas?.includes(tipo.nomeCaracterisiticas)" (change)="toggleFiltro(tipo.nomeCaracterisiticas, 'caracteristicas')">
-                                <label class="form-check-label mt-1 ps-2" for="{{ tipo.nomeCaracterisiticas }}">{{ tipo.nomeCaracterisiticas }}</label>
+                                <input class="form-check-input" type="checkbox"
+                                    id="{{ tipo.nomeCaracterisiticas }}"
+                                    [checked]="filtro.caracteristicas?.includes(tipo.nomeCaracterisiticas)"
+                                    (change)="toggleFiltro(tipo.nomeCaracterisiticas, 'caracteristicas')">
+                                <label class="form-check-label mt-1 ps-2"
+                                    for="{{ tipo.nomeCaracterisiticas }}">{{ tipo.nomeCaracterisiticas }}</label>
                             </div>
-                            <img class="ms-auto align-self-center" [src]= "getImageUrl(tipo.imgCaracteristicas)"
-                                alt="{{ tipo.nomeCaracterisiticas }}" style="border-radius: 4px;">
+                            <img class="ms-auto align-self-center"
+                                [src]="getImageUrl(tipo.imgCaracteristicas)" alt="{{ tipo.nomeCaracterisiticas }}"
+                                style="border-radius: 4px;">
                         </button>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

@@ -1,9 +1,14 @@
-
 <article class="col h-100">
     <div class="card border-0 h-100">
-        <img [src]="imagePath" class="card-img" [alt]="nomeProduto" [ngClass]="{ 'aspect-ratio-square': aspectRatio === 'square', 'aspect-ratio-rectangular': aspectRatio === 'rectangular' }">
+        <img [src]="imageSrc"
+        class="card-img"
+        [alt]="nomeProduto"
+        loading="lazy"
+        [ngClass]="{ 'aspect-ratio-square': aspectRatio === 'square', 'aspect-ratio-rectangular': aspectRatio ===
+        'rectangular' }">
         <div class="card-img-overlay">
-            <div *ngIf="grupo !== 'Normal' && grupo !== null" class="custom-badge d-flex mt-auto position-absolute bottom-0 end-0">
+            <div *ngIf="grupo !== 'Normal' && grupo !== null"
+                class="custom-badge d-flex mt-auto position-absolute bottom-0 end-0">
                 <div class="badge-content">
                     {{ grupo }}
                 </div>
@@ -12,4 +17,5 @@
     </div>
 </article>
 
-<app-papel-individual [imagePath]="imagePath" [idProduto]="idProduto" [descProduto]="descProduto" [nomeProduto]="nomeProduto"></app-papel-individual>
+<app-papel-individual [imagePath]="imagePath" [idProduto]="idProduto" [descProduto]="descProduto"
+    [nomeProduto]="nomeProduto"></app-papel-individual>
