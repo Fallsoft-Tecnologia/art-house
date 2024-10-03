@@ -16,24 +16,22 @@ export class PaginacaoComponent implements OnInit{
 
   ngOnInit(): void {
   }
-
   prevPage() {
-    if (this.currentPage > 0) {
-      this.pageChange.emit(this.currentPage - 1);
+    if (this.currentPage > 1) {
+        this.currentPage--;
+        this.pageChange.emit(this.currentPage);
     }
-  }
+}
 
-  nextPage() {
+nextPage() {
     if (this.currentPage < this.totalPages) {
-      this.pageChange.emit(this.currentPage + 1);
+        this.currentPage++;
+        this.pageChange.emit(this.currentPage);
     }
-  }
-  
-  changePage(page: number) {
-    this.pageChange.emit(page);
-  }
+}
 
-  getPages(totalPages: number): number[] {
-    return Array.from({ length: totalPages }, (_, index) => index + 1);
-  }
+
+
+
+
 }

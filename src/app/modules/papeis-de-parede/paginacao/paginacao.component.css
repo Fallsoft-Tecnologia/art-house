@@ -1,9 +1,14 @@
 .pagination {
     font-variant-numeric: lining-nums proportional-nums;
+    display: flex;
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    margin-bottom: 20px;
+    
 }
 
 .page-item {
     cursor: pointer;
+    
 }
 
 .page-item .disabled {
@@ -29,4 +34,13 @@
 
 i {
     font-size: 20px;
+    display: flex;
+    align-items: center;
 }
+.page-info{
+    font-weight: 600;
+}
+
+
+
+
