@@ -1,17 +1,17 @@
 <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center gap-1">
+    <div class="pagination justify-content-center gap-1">
         <li class="page-item">
             <a class="page-link" (click)="prevPage()" aria-label="Previous" [class.disabled]="currentPage === 1">
-                <i class="fa-solid fa-angle-left align-middle" aria-hidden="true"></i>
+                <i class="fa-solid fa-angle-left" aria-hidden="true"></i>
             </a>
         </li>
-        <li class="page-item" *ngFor="let page of getPages(totalPages)">
-            <a class="page-link" (click)="changePage(page)" [class.active]="currentPage === page">{{ page }}</a>
-        </li>
+        <span class="page-info">
+            Página: {{ currentPage }} de {{ totalPages }}
+        </span>
         <li class="page-item">
             <a class="page-link" (click)="nextPage()" aria-label="Next" [class.disabled]="currentPage === totalPages">
-                <i class="fa-solid fa-angle-right align-middle" aria-hidden="true"></i>
+                <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
             </a>
         </li>
-    </ul>
+    </div>
 </nav>
