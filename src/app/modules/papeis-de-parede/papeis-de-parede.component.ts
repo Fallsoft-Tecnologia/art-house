@@ -36,7 +36,7 @@ export class PapeisDeParedeComponent implements OnInit {
 
   carregarProdutos(): void {
     this.isLoading = true
-
+    this.imageDataList = [];
     this.filtroService.listrarProdutosFiltrados(this.filtro, this.currentPage - 1, this.pageSize)
     .subscribe({
       next: (response: any) => {
