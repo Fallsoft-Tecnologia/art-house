@@ -55,6 +55,7 @@ export class LeadDescontoFormComponent implements OnInit {
       });
     } else {
       this.notificacaoService.mostrarNotificacao(this.errorMessage, TipoNotificacao.Erro);
+      this.isLoading = false;
     }
   }
 
@@ -72,11 +73,11 @@ export class LeadDescontoFormComponent implements OnInit {
     this.notificacaoService.mostrarNotificacao(this.successMessage, TipoNotificacao.Sucesso);
     this.leadDescontoForm.reset();
     this.submitted = false;
-    this.isLoading = false
+    this.isLoading = false;
   }
 
   private handleError(error: any) {
-    this.isLoading = false
+    this.isLoading = false;
     this.notificacaoService.mostrarNotificacao(this.errorMessage, TipoNotificacao.Erro);
     console.error('Erro ao cadastrar o lead:', error);
     
