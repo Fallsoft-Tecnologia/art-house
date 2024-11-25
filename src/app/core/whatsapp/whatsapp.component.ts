@@ -9,10 +9,12 @@ declare var gtag: Function;
 })
 export class WhatsappComponent {
   trackWhatsappClick(): void {
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'conversion', {
-        'send_to': 'AW-661767471/b5OSCNvm9-wZEK-Kx7sC'
-      });
-    }
+    gtag('event', 'conversion', {
+      send_to: 'AW-661767471/b5OSCNvm9-wZEK-Kx7sC',
+      event_category: 'engagement',
+      event_label: 'WhatsApp Button',
+      value: 1
+    });
+    console.log('WhatsApp click tracked!');
   }
 }
