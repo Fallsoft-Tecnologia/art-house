@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AnalyticsService } from '../services/analytics.service';
 
 declare var gtag: Function;
 
@@ -8,13 +9,9 @@ declare var gtag: Function;
   styleUrls: ['./whatsapp.component.css']
 })
 export class WhatsappComponent {
-  trackWhatsappClick(): void {
-    gtag('event', 'conversion', {
-      send_to: 'AW-661767471/b5OSCNvm9-wZEK-Kx7sC',
-      event_category: 'engagement',
-      event_label: 'WhatsApp Button',
-      value: 1
-    });
-    console.log('WhatsApp click tracked!');
+  constructor(private analytics: AnalyticsService) {}
+
+  trackWhatsappClick() {
+    this.analytics.sendConversion('AW-661767471/b5OSCNvm9-wZEK-Kx7sC');
   }
 }
